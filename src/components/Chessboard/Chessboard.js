@@ -20,7 +20,11 @@ class Chessboard extends Component {
             }
             else{
               let color = rowNumber%2===i%2 ? 'whiteSquare' : 'blackSquare'
-              squares.push(<th key={i}><Square color={color}/></th>)
+              squares.push(
+                <th key={i} xCord={rowNumber} yCord={i}>
+                  <Square color={color}/>
+                </th>
+              );
             }
         }
         return squares;

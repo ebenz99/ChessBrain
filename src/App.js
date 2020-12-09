@@ -1,13 +1,10 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 import Chessboard from './components/Chessboard/Chessboard.js';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        < Chessboard />
-      </header>
+      < Chessboard />
     </div>
   );
 }

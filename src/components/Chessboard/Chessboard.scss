@@ -1,5 +1,17 @@
-.board {
-    border:0px;
-    border-collapse:collapse;
-    border-spacing:0px;
+table {
+    border-collapse: collapse;
+}
+
+tbody {
+    border-collapse: collapse;
+}
+
+th {
+    padding: 0px;
+    margin: 0px;
+}
+
+tr {
+    padding: 0px;
+    margin: 0px;
 }
