@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { PIECE_MAPPINGS, COLOR_MAPPINGS} from '../../constants.js'
 import './Square.scss'
 
 class Square extends Component {
