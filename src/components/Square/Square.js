@@ -20,6 +20,7 @@ class Square extends Component {
     }
     // the square we render is a colored div with an Piece object in the center
     return (
+      //button?
       <button className={this.props.color} onClick = {this.wasClicked}>
         {piece}
       </button>
