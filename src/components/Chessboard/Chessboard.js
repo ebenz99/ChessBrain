@@ -9,7 +9,7 @@ class Chessboard extends Component {
     // initial state is resting state of the board, this will change
     // piece positions are encoded as [<color>, <pieceName>] (mappings for these numbers can be found in the src/constants.js file)
     this.state={
-      piecePositions: 
+      piecePositions:
         [
           [[1,5], [1,3], [1,4], [1,9], [1,10], [1,4], [1,3], [1,5]],
           [[1,1], [1,1], [1,1], [1,1], [1,1], [1,1], [1,1], [1,1]],
@@ -30,7 +30,7 @@ class Chessboard extends Component {
     // rowNumber is an integer we use to track our position in the table when instantiation squares
     const construct8 = (rc, rowNumber) => {
         // when we're in the row section of our recursion, 'squares' contains rows of squares
-        // when we;re in the column section of our recursion, 'squares' contains a list of squares
+        // when we're in the column section of our recursion, 'squares' contains a list of squares
         let squares = [];
         for (let i=0; i < 8; i+=1){
             // if we're building a row
@@ -39,7 +39,7 @@ class Chessboard extends Component {
                 let cols = construct8('c', i)
                 //wrap those columns in a <tr> (table row) html element
                 let row = <tr key={i}>{cols}</tr>
-                //add this row to the list of rows that will make our board 
+                //add this row to the list of rows that will make our board
                 squares.push(row)
             }
             // if we're building a column

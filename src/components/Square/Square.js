@@ -9,6 +9,7 @@ class Square extends Component {
       pieceColor: this.props.pieceColor,
       pieceName: this.props.pieceName
     }
+    this.wasClicked = this.wasClicked.bind(this);
   }
 
   render() {
@@ -19,10 +20,13 @@ class Square extends Component {
     }
     // the square we render is a colored div with an Piece object in the center
     return (
-      <div className={this.props.color}>
+      <button className={this.props.color} onClick = {this.wasClicked}>
         {piece}
-      </div>
+      </button>
     );
+  }
+  wasClicked(){
+    this.props.setPosition(this.props.xCord,this.props.yCord);
   }
 }
 
