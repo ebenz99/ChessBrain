@@ -29,17 +29,23 @@ class Chessboard extends Component {
 
   // marks a position as either initial or final state
   setPosition = (r, c) => {
-    // if an initial has already been clicked, set the new as the final
+    // if an initial has already been clicked
     if (this.state.initialPosition) {
+      // if the same square clicked twice, just reset the initial position to null
+      if(_.isEqual(this.state.initialPosition, [r,c])){
+        this.setState({initialPosition: null});
+        return
+      }
+      //otherwise set the new as the final
       let newItem = this.state.piecePositions[this.state.initialPosition[0]][this.state.initialPosition[1]].slice();
       let newBoard = this.state.piecePositions.slice();
       newBoard[r][c] = newItem;
       newBoard[this.state.initialPosition[0]][this.state.initialPosition[1]] = BLANK_SQUARE;
+      console.log(newBoard);
       this.setState({initialPosition: null, piecePositions: newBoard})
     }
     else {
-      // otherwise set this as the initial
-
+      // otherwise set this as the initial if it isn't blank
       if(!_.isEqual(this.state.piecePositions[r][c], BLANK_SQUARE)){
         this.setState({initialPosition: [r,c]});
       }

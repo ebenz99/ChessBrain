@@ -8,6 +8,10 @@
     display: block;
 }
 
+.whiteSquare:hover{
+    background-color: var(--light-square-hover);
+}
+
 .blackSquare{
     background-color: var(--dark-square);
     border: 3px solid black;
@@ -16,6 +20,10 @@
     padding: 0px;
     margin: 0px;
     display: block;
+}
+
+.blackSquare:hover{
+    background-color: var(--dark-square-hover);
 }
 
 .orangeSquare{
