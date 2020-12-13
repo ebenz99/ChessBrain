@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Square from '../Square/Square.js';
 import { PIECE_MAPPINGS, COLOR_MAPPINGS } from '../../constants.js';
 import './Chessboard.scss';
-import { initial } from 'lodash';
-import { NULL } from 'node-sass';
 
 class Chessboard extends Component {
   constructor(props) {
