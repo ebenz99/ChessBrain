@@ -6,9 +6,19 @@
     padding: 0px;
     margin: 0px;
 }
+
 .blackSquare{
     background-color: var(--dark-square);
     border: 3px solid black;
+    width: 10vh;
+    height: 10vh;
+    padding: 0px;
+    margin: 0px;
+}
+
+.orangeSquare{
+    background-color: var(--selected-square);
+    border: 3px solid rgb(0, 0, 0);
     width: 10vh;
     height: 10vh;
     padding: 0px;

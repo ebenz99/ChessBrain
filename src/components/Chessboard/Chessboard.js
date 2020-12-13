@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import Square from '../Square/Square.js';
 import { PIECE_MAPPINGS, COLOR_MAPPINGS, BLANK_SQUARE } from '../../constants.js';
 import './Chessboard.scss';
@@ -38,7 +39,10 @@ class Chessboard extends Component {
     }
     else {
       // otherwise set this as the initial
-      this.setState({initialPosition: [r,c]});
+
+      if(!_.isEqual(this.state.piecePositions[r][c], BLANK_SQUARE)){
+        this.setState({initialPosition: [r,c]});
+      }
     }
   }
 
@@ -73,9 +77,10 @@ class Chessboard extends Component {
                   pieceColor = COLOR_MAPPINGS[this.state.piecePositions[row][col][0]];
                   pieceName = PIECE_MAPPINGS[this.state.piecePositions[row][col][1]];
                 }
+                let selected = _.isEqual([row,col], this.state.initialPosition) ? true : false;
                 // returns a square wrapped in <th> elements
                 return  <th className="squareContainer" key={i} >
-                          <Square rowCord={rowNumber} colCord={i} color={color} pieceColor={pieceColor} pieceName={pieceName} setPosition={this.setPosition}/>
+                          <Square selected={selected} rowCord={rowNumber} colCord={i} color={color} pieceColor={pieceColor} pieceName={pieceName} setPosition={this.setPosition}/>
                         </th>
                 })(rowNumber, i) //calls the function to return the square we just created into the array
               );

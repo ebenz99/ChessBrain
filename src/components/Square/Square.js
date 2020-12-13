@@ -15,9 +15,12 @@ class Square extends Component {
     if ((this.props.pieceName) && (this.props.pieceColor)) {
       piece = <Piece color={this.props.pieceColor} piece={this.props.pieceName} />
     }
+  
+    let squareColor = this.props.selected ? 'orangeSquare' : this.props.color;
+
     // the square we render is a colored div with an Piece object in the center
     return (
-      <button className={this.props.color} onClick = {this.wasClicked}>
+      <button className={squareColor} onClick = {this.wasClicked}>
         {piece}
       </button>
     );
