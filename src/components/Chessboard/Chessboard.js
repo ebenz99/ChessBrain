@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Square from '../Square/Square.js';
 import { PIECE_MAPPINGS, COLOR_MAPPINGS } from '../../constants.js';
 import './Chessboard.scss';
+import { initial } from 'lodash';
+import { NULL } from 'node-sass';
 
 class Chessboard extends Component {
   constructor(props) {
@@ -19,12 +21,32 @@ class Chessboard extends Component {
           [[2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2]],
           [[0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1]],
           [[0,5], [0,3], [0,4], [0,9], [0,10], [0,4], [0,3], [0,5]]
-        ]
+        ],
+        initialPosition: null,
+        finalPosition: null,
+    }
+    // allows setPosition's "this" calls to always refer to the chessboard object
+    this.setPosition = this.setPosition.bind(this);
+  }
+
+  // marks a position as either initial or final state
+  setPosition = (x, y) => {
+    // if an initial has already been clicked, set the new as the final
+    if (this.state.initialPosition) {
+      this.setState({finalPosition: [x,y]});
+    }
+    else {
+      // otherwise set this as the initial
+      this.setState({initialPosition: [x,y], finalPosition: null});
     }
   }
 
   // this method returns the html for the board (an HTML table element)
   buildBoard = () => {
+    if (this.state.finalPosition) {
+      console.log('both clicked!')
+    }
+
     // this is a method we use to build the board--it constructs the grid that we'll wrap with <table> elements
     // rc is 'r' if we're building table rows and 'c' for building columns -- this function is recursive, so that flag is necessary
     // rowNumber is an integer we use to track our position in the table when instantiation squares
@@ -56,7 +78,7 @@ class Chessboard extends Component {
                 }
                 // returns a square wrapped in <th> elements
                 return  <th className="squareContainer" key={i} >
-                          <Square xCord={rowNumber} yCord={i} color={color} pieceColor={pieceColor} pieceName={pieceName}/>
+                          <Square xCord={rowNumber} yCord={i} color={color} pieceColor={pieceColor} pieceName={pieceName} setPosition={this.setPosition}/>
                         </th>
                 })(rowNumber, i) //calls the function to return the square we just created into the array
               );
