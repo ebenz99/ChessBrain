@@ -1,9 +1,21 @@
 
 import _ from 'lodash';
 
+//helper function to see if a square has black, white, or no piece
 export function squareHasPiece(board, position){
   console.log(position)
   return board[position[0]][position[1]][0];
+}
+
+// the following functions are called in whiteLegalMove() depending on the piece
+export function whiteKingLegalMove(board, initialPosition, finalPosition){
+  let result = false;
+  let finalPositionIsPossible = (Math.abs(finalPosition[0]-initialPosition[0]) < 2 &&
+                                  Math.abs(finalPosition[1]-initialPosition[1]) < 2);
+  if (finalPositionIsPossible){
+    result = (squareHasPiece(board, finalPosition) !== 0);
+  }
+  return result;
 }
 
 export function whitePawnLegalMove(board, initialPosition, finalPosition) {
@@ -82,7 +94,7 @@ export function whiteRookLegalMove(board, initialPosition, finalPosition){
       cDirection = -1;
     }
   }else{
-    if(finalPosition[1]-initialPosition[1]>0){
+    if(finalPosition[0]-initialPosition[0]>0){
       rDirection = 1;
     }else{
       rDirection = -1;
@@ -120,6 +132,7 @@ export function whiteRookLegalMove(board, initialPosition, finalPosition){
   return result;
 }
 
+//called in legalMove() if the piece being evaluated is white
 export function whiteLegalMove(board, piece, initialPosition, finalPosition){
   let result = false;
   if (piece === 1) result = whitePawnLegalMove(board, initialPosition, finalPosition)
@@ -129,11 +142,22 @@ export function whiteLegalMove(board, piece, initialPosition, finalPosition){
   else if (piece === 9) {
     result =  whiteRookLegalMove(board, initialPosition, finalPosition) ||
     whiteBishopLegalMove(board, initialPosition, finalPosition);
+  }else if (piece === 10){
+    result = whiteKingLegalMove(board, initialPosition, finalPosition);
   }
   return result;
 }
 
-/////////////////////////////////////////////////////////////////
+//the following functions are called in blackLegalMove() depending on the piece
+export function blackKingLegalMove(board, initialPosition, finalPosition){
+  let result = false;
+  let finalPositionIsPossible = (Math.abs(finalPosition[0]-initialPosition[0]) < 2 &&
+                                  Math.abs(finalPosition[1]-initialPosition[1]) < 2);
+  if (finalPositionIsPossible){
+    result = (squareHasPiece(board, finalPosition) !== 1);
+  }
+  return result;
+}
 
 export function blackPawnLegalMove(board, initialPosition, finalPosition) {
 
@@ -206,7 +230,7 @@ export function blackRookLegalMove(board, initialPosition, finalPosition){
   }
 
   if (finalPosition[0]-initialPosition[0]===0){
-    if(finalPosition[1]-initialPosition[1]>0){
+    if(finalPosition[0]-initialPosition[0]>0){
       cDirection = 1;
     }else{
       cDirection = -1;
@@ -248,6 +272,7 @@ export function blackRookLegalMove(board, initialPosition, finalPosition){
   return result;
 }
 
+//is called in legal move if the piece being evaluated is black
 export function blackLegalMove(board, piece, initialPosition, finalPosition){
   let result = false;
   if (piece === 1) result = blackPawnLegalMove(board, initialPosition, finalPosition)
@@ -257,13 +282,13 @@ export function blackLegalMove(board, piece, initialPosition, finalPosition){
   else if (piece === 9) {
     result =  blackRookLegalMove(board, initialPosition, finalPosition) ||
     blackBishopLegalMove(board, initialPosition, finalPosition);
+  }else if (piece === 10){
+    result = blackKingLegalMove(board, initialPosition, finalPosition);
   }
   return result;
 }
 
-//////////////////////////////////////
-
-
+//checks if a move is legal
 export function legalMove(board, piece, color, initialPosition, finalPosition){
   let result = false;
   if (color === 0){

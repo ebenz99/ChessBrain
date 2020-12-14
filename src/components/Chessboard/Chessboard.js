@@ -22,7 +22,10 @@ class Chessboard extends Component {
           [[0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1]],
           [[0,5], [0,3], [0,4], [0,9], [0,10], [0,4], [0,3], [0,5]]
         ],
-        initialPosition: null
+        initialPosition: null,
+        whiteCanCastle: true,
+        blackCanCastle: true,
+        colorToMove: 0
     }
     // allows setPosition's "this" calls to always refer to the chessboard object
     this.setPosition = this.setPosition.bind(this);
@@ -49,6 +52,7 @@ class Chessboard extends Component {
       newBoard[this.state.initialPosition[0]][this.state.initialPosition[1]] = BLANK_SQUARE;
       console.log(newBoard);
       this.setState({initialPosition: null, piecePositions: newBoard})
+      console.log(this.hashPosition())
     }
     else {
       // otherwise set this as the initial if it isn't blank
@@ -104,6 +108,26 @@ class Chessboard extends Component {
     return (
         <table className='board'><tbody className='board'>{construct8('r')}</tbody></table>
       );
+  }
+
+  hashCode = function(s) {
+    var hash = 0;
+    if (s.length == 0) {
+        return hash;
+    }
+    for (var i = 0; i < s.length; i++) {
+        var char = s.charCodeAt(i);
+        hash = ((hash<<5)-hash)+char;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash;
+}
+  hashPosition(){
+    let stateString = this.state.piecePositions.toString()+
+    this.state.whiteCanCastle.toString()+
+    this.state.blackCanCastle.toString()+
+    this.state.colorToMove.toString();
+    return this.hashCode(stateString);
   }
 
   // rendering the chessboard means displaying the result HTML from buildBoard()
