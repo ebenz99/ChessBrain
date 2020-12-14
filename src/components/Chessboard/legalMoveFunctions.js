@@ -82,7 +82,7 @@ export function whiteRookLegalMove(board, initialPosition, finalPosition){
   let rDirection = 0;
   let cDirection = 0;
 
-  if(!((finalPosition[0]-initialPosition[0] == 0) ||(finalPosition[1]-initialPosition[1] == 0))){
+  if(!((finalPosition[0]-initialPosition[0] === 0) ||(finalPosition[1]-initialPosition[1] === 0))){
     console.log("trivially false");
     return false;
   }
@@ -224,7 +224,7 @@ export function blackRookLegalMove(board, initialPosition, finalPosition){
   let rDirection = 0;
   let cDirection = 0;
 
-  if(!((finalPosition[0]-initialPosition[0] == 0) ||(finalPosition[1]-initialPosition[1] == 0))){
+  if(!((finalPosition[0]-initialPosition[0] === 0) ||(finalPosition[1]-initialPosition[1] === 0))){
     console.log("trivially false");
     return false;
   }

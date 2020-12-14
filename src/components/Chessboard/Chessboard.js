@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import Square from '../Square/Square.js';
 import { PIECE_MAPPINGS, COLOR_MAPPINGS, BLANK_SQUARE } from '../../constants.js';
+import getMove from '../../utilities/getMove.js'
 import './Chessboard.scss';
 import * as helperFunctions from './legalMoveFunctions.js';
 
@@ -49,6 +50,9 @@ class Chessboard extends Component {
       newBoard[r][c] = newItem;
       newBoard[this.state.initialPosition[0]][this.state.initialPosition[1]] = BLANK_SQUARE;
       console.log(newBoard);
+      getMove().then((response) => {
+        console.log(response);
+      })
       this.setState({initialPosition: null, piecePositions: newBoard})
       console.log(this.hashPosition())
     }
@@ -110,7 +114,7 @@ class Chessboard extends Component {
 
   hashCode = function(s) {
     var hash = 0;
-    if (s.length == 0) {
+    if (s.length === 0) {
         return hash;
     }
     for (var i = 0; i < s.length; i++) {
