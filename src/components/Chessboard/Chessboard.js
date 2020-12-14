@@ -3,6 +3,7 @@ import _ from 'lodash';
 import Square from '../Square/Square.js';
 import { PIECE_MAPPINGS, COLOR_MAPPINGS, BLANK_SQUARE } from '../../constants.js';
 import './Chessboard.scss';
+import * as helperFunctions from './legalMoveFunctions.js';
 
 class Chessboard extends Component {
   constructor(props) {
@@ -36,6 +37,11 @@ class Chessboard extends Component {
         this.setState({initialPosition: null});
         return
       }
+      //otherwise check if this is a legal move
+      if (helperFunctions.legalMove(this.state.piecePositions,
+        this.state.piecePositions[this.state.initialPosition[0]][this.state.initialPosition[1]][1],
+        this.state.piecePositions[this.state.initialPosition[0]][this.state.initialPosition[1]][0],
+        this.state.initialPosition, [r,c]) === false){return}
       //otherwise set the new as the final
       let newItem = this.state.piecePositions[this.state.initialPosition[0]][this.state.initialPosition[1]].slice();
       let newBoard = this.state.piecePositions.slice();
