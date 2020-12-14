@@ -22,10 +22,8 @@ class Chessboard extends Component {
           [[0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1]],
           [[0,5], [0,3], [0,4], [0,9], [0,10], [0,4], [0,3], [0,5]]
         ],
+        auxBoardState: [true,true,0,null],
         initialPosition: null,
-        whiteCanCastle: true,
-        blackCanCastle: true,
-        colorToMove: 0
     }
     // allows setPosition's "this" calls to always refer to the chessboard object
     this.setPosition = this.setPosition.bind(this);
@@ -124,9 +122,8 @@ class Chessboard extends Component {
 }
   hashPosition(){
     let stateString = this.state.piecePositions.toString()+
-    this.state.whiteCanCastle.toString()+
-    this.state.blackCanCastle.toString()+
-    this.state.colorToMove.toString();
+    this.state.auxBoardState.toString();
+    
     return this.hashCode(stateString);
   }
 

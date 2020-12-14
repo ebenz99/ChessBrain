@@ -298,3 +298,8 @@ export function legalMove(board, piece, color, initialPosition, finalPosition){
   }
   return result;
 }
+
+//////
+export function augmentBoard(){
+  
+}
