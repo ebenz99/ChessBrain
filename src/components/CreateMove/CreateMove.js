@@ -39,4 +39,11 @@ class CreateMove extends Component {
   }
 }
 
+const submitMove = (form) => {
+    // get form.data stored into a variable
+    // use axios like getMove.js does, store form.data in the request
+    // wait for the api call to finish and return data
+    // then take the data, 
+}
+
 export default CreateMove;
