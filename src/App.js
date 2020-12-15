@@ -8,7 +8,9 @@ function App() {
       <div className="boardComponentContainer">
         < Chessboard />
       </div>
-      < CreateMove />
+      <div className="formComponentContainer">
+        < CreateMove />
+      </div>
     </div>
   );
 }

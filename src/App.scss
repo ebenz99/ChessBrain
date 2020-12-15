@@ -6,7 +6,14 @@
 .boardComponentContainer {
   float: left;
   width: 50%;
-  height: 80%;
+  height: 80vh;
   padding-left: 5%;
-  padding-top: 5%;
+  padding-top: 5vh;
+}
+
+.formComponentContainer {
+  float: left;
+  width: 35%;
+  padding-left: 5%;
+  height: 100vh;
 }
