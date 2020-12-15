@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { BACKEND_ENDPOINT } from '../constants.js';
 
-const getMove = () => {
+const getMove = (boardStateHash) => {
     return axios({method: 'get', url: `${BACKEND_ENDPOINT}nextmove`,
         params: {
-            'board': "hi"
+            'board': boardStateHash
         }
     })
     .then((response) => {
