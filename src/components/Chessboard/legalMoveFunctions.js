@@ -10,12 +10,12 @@ export function squareHasPiece(board, position){
 export function whiteKingLegalMove(board, initialPosition, finalPosition, auxBoardState){
   let whiteCanCastle = auxBoardState[0];
   //seperate logic for castling
-  console.log(finalPosition);
-  console.log(_.isEqual(finalPosition, [7,6])+"::");
+  // console.log(finalPosition);
+  // console.log(_.isEqual(finalPosition, [7,6])+"::");
   if (_.isEqual(finalPosition, [7,6]) && whiteCanCastle){
-    console.log("in correct conditional");
-    console.log((squareHasPiece(board, [7,5]) === 2));
-    console.log((squareHasPiece(board, [6,7]) ===2));
+    // console.log("in correct conditional");
+    // console.log((squareHasPiece(board, [7,5]) === 2));
+    // console.log((squareHasPiece(board, [6,7]) ===2));
 
     return (squareHasPiece(board, [7,5])=== 2) && (squareHasPiece(board, [7,6]) ===2);
   }else if (_.isEqual(finalPosition,[7,2]) && whiteCanCastle){
@@ -165,8 +165,8 @@ export function blackKingLegalMove(board, initialPosition, finalPosition, auxBoa
   let blackCanCastle = auxBoardState[1];
   //seperate logic for castling
   if (_.isEqual(finalPosition, [0,6]) && blackCanCastle){
-    console.log("in correct conditional");
-    return (squareHasPiece(board, [0,5])=== 2) && (squareHasPiece(board, [0,6]) ==2);
+    // console.log("in correct conditional");
+    return (squareHasPiece(board, [0,5])=== 2) && (squareHasPiece(board, [0,6]) ===2);
   }else if (_.isEqual(finalPosition, [0,2]) && blackCanCastle){
     return (squareHasPiece(board, [0,1]) === 2) &&
             (squareHasPiece(board, [0,2]) === 2) &&
@@ -315,7 +315,7 @@ export function legalMove(board, piece, color, initialPosition, finalPosition, a
   }else if (color === 1){
     result = blackLegalMove(board, piece, initialPosition, finalPosition, auxBoardState);
   }
-  console.log("move is legal: "+result);
+  // console.log("move is legal: "+result);
   return result && auxBoardState[2]===color;
 }
 
@@ -345,7 +345,7 @@ export function isWhiteKingInCheck(board, auxBoardState) {
       if (board[i][j][0]===1){
         kingInCheck = blackLegalMove(board, board[i][j][1], [i,j], kingCoordinates, auxBoardState);
         if (kingInCheck){
-          console.log("white king is in check");
+          // console.log("white king is in check");
           return true;
         }
       }
@@ -375,7 +375,7 @@ export function isBlackKingInCheck(board, auxBoardState) {
       if (board[i][j][0]===0){
         kingInCheck = whiteLegalMove(board, board[i][j][1], [i,j],kingCoordinates, auxBoardState);
         if (kingInCheck){
-          console.log("black king is in check");
+          // console.log("black king is in check");
           return true;
         }
       }
