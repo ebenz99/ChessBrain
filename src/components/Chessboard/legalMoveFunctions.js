@@ -316,7 +316,7 @@ export function legalMove(board, piece, color, initialPosition, finalPosition, a
     result = blackLegalMove(board, piece, initialPosition, finalPosition, auxBoardState);
   }
   console.log("move is legal: "+result);
-  return result;
+  return result && auxBoardState[2]===color;
 }
 
 //////

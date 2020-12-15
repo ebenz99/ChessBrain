@@ -4,7 +4,8 @@ import Square from '../Square/Square.js';
 import { PIECE_MAPPINGS, COLOR_MAPPINGS, BLANK_SQUARE } from '../../constants.js';
 import getMove from '../../utilities/getMove.js'
 import './Chessboard.scss';
-import * as helperFunctions from './legalMoveFunctions.js';
+import { legalMove, isWhiteKingInCheck, isBlackKingInCheck} from './legalMoveFunctions.js';
+import { pieceMoveFinal } from './augmentBoardFunctions.js';
 
 class Chessboard extends Component {
   constructor(props) {
@@ -41,23 +42,24 @@ class Chessboard extends Component {
         return
       }
       //otherwise check if this is a legal move
-      if (helperFunctions.legalMove(this.state.piecePositions,
+      if (legalMove(this.state.piecePositions,
         this.state.piecePositions[this.state.initialPosition[0]][this.state.initialPosition[1]][1],
         this.state.piecePositions[this.state.initialPosition[0]][this.state.initialPosition[1]][0],
         this.state.initialPosition, [r,c], this.state.auxBoardState) === false){return}
-      //otherwise set the new as the final
-      let newItem = this.state.piecePositions[this.state.initialPosition[0]][this.state.initialPosition[1]].slice();
-      let newBoard = this.state.piecePositions.slice();
-      newBoard[r][c] = newItem;
-      newBoard[this.state.initialPosition[0]][this.state.initialPosition[1]] = BLANK_SQUARE;
+      //otherwise make the move
+      let newBoard = pieceMoveFinal(this.state.piecePositions,
+                                    this.state.initialPosition,
+                                    [r,c]);
+      ///what is this magic below
       console.log(newBoard);
       getMove().then((response) => {
         console.log(response);
       })
       this.setState({initialPosition: null, piecePositions: newBoard})
+      this.state.auxBoardState[2]=(this.state.auxBoardState[2]+1)%2
       console.log(this.hashPosition())
-      helperFunctions.isWhiteKingInCheck(this.state.piecePositions, this.state.auxBoardState);
-      helperFunctions.isBlackKingInCheck(this.state.piecePositions, this.state.auxBoardState);
+      isWhiteKingInCheck(this.state.piecePositions, this.state.auxBoardState);
+      isBlackKingInCheck(this.state.piecePositions, this.state.auxBoardState);
 
     }
     else {
