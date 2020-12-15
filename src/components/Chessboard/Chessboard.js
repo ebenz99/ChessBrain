@@ -58,9 +58,17 @@ class Chessboard extends Component {
         ;
       })
       this.setState({initialPosition: null, piecePositions: newBoard})
+
       // need setState to modify state, this won't work
-      this.state.auxBoardState[2]=(this.state.auxBoardState[2]+1)%2
       // console.log(this.hashPosition())
+
+
+      let colorToMove = (this.state.auxBoardState[2]+1)%2;
+      let newAuxBoardState = this.state.auxBoardState.slice();
+      newAuxBoardState[2]=colorToMove;
+      this.setState({auxBoardState: newAuxBoardState});
+      console.log(this.hashPosition())
+
       isWhiteKingInCheck(this.state.piecePositions, this.state.auxBoardState);
       isBlackKingInCheck(this.state.piecePositions, this.state.auxBoardState);
 

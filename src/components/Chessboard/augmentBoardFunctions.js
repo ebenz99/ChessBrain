@@ -17,9 +17,18 @@ export function pieceMoveFinal(board, initialPosition, finalPosition){
         _.isEqual(initialPosition, [7,4]) &&
         _.isEqual(finalPosition, [7,6])){return whiteCastlesKingside(board)}
 
-  if (_.isEqual(board[initialPosition[0]][initialPosition[1]], [0,10]) &&
+  else if (_.isEqual(board[initialPosition[0]][initialPosition[1]], [0,10]) &&
         _.isEqual(initialPosition, [7,4]) &&
         _.isEqual(finalPosition, [7,2])){return whiteCastlesQueenside(board)}
+
+  else if (_.isEqual(board[initialPosition[0]][initialPosition[1]], [1,10]) &&
+        _.isEqual(initialPosition, [0,4]) &&
+        _.isEqual(finalPosition, [0,6])){return blackCastlesKingside(board)}
+
+  else if (_.isEqual(board[initialPosition[0]][initialPosition[1]], [1,10]) &&
+        _.isEqual(initialPosition, [0,4]) &&
+        _.isEqual(finalPosition, [0,2])){return blackCastlesQueenside(board)}
+
 
   return normalPieceMove(board, initialPosition, finalPosition);
 }
@@ -46,4 +55,24 @@ export function whiteCastlesQueenside(board){
   let board3 = replaceSquare(board2, [7,3], [0,5]);
   let result = replaceSquare(board3, [7,4], BLANK_SQUARE);
   return result;
+}
+
+export function blackCastlesKingside(board){
+  let board1 = replaceSquare(board, [0,4], BLANK_SQUARE);
+  let board2 = replaceSquare(board1, [0,5], [1,5]);
+  let board3 = replaceSquare(board2, [0,6], [1,10]);
+  let result = replaceSquare(board3, [0,7], BLANK_SQUARE);
+  return result;
+}
+export function blackCastlesQueenside(board){
+  let board1 = replaceSquare(board, [0,0], BLANK_SQUARE);
+  let board2 = replaceSquare(board1, [0,2], [1,10]);
+  let board3 = replaceSquare(board2, [0,3], [1,5]);
+  let result = replaceSquare(board3, [0,4], BLANK_SQUARE);
+  return result;
+}
+
+export function whiteTakesEnPassant(board, initialPosition, finalPosition) {
+  let board1 = replaceSquare(board, initialPosition, BLANK_SQUARE);
+  let board2 = replaceSquare(board1, initialPosition)
 }
