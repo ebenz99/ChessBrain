@@ -43,7 +43,7 @@ class Chessboard extends Component {
       if (helperFunctions.legalMove(this.state.piecePositions,
         this.state.piecePositions[this.state.initialPosition[0]][this.state.initialPosition[1]][1],
         this.state.piecePositions[this.state.initialPosition[0]][this.state.initialPosition[1]][0],
-        this.state.initialPosition, [r,c]) === false){return}
+        this.state.initialPosition, [r,c], this.state.auxBoardState) === false){return}
       //otherwise set the new as the final
       let newItem = this.state.piecePositions[this.state.initialPosition[0]][this.state.initialPosition[1]].slice();
       let newBoard = this.state.piecePositions.slice();
@@ -55,8 +55,8 @@ class Chessboard extends Component {
       })
       this.setState({initialPosition: null, piecePositions: newBoard})
       console.log(this.hashPosition())
-      console.log(helperFunctions.isWhiteKingInCheck(this.state.piecePositions));
-      console.log(helperFunctions.isBlackKingInCheck(this.state.piecePositions));
+      helperFunctions.isWhiteKingInCheck(this.state.piecePositions, this.state.auxBoardState);
+      helperFunctions.isBlackKingInCheck(this.state.piecePositions, this.state.auxBoardState);
 
     }
     else {
