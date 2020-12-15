@@ -8,10 +8,10 @@ function App() {
       <div className="boardComponentContainer">
         < Chessboard />
       </div>
+      < CreateMove />
     </div>
   );
 }
 
-{/* < CreateMove /> */}
 
 export default App;
