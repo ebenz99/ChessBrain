@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './CreateMove.scss';
+import axios from 'axios';
 
 class CreateMove extends Component {
   constructor(props) {
@@ -11,27 +12,27 @@ class CreateMove extends Component {
   render() {
     return (
         <div className='newMoveFormContainer'>
-            <form id="moveForm">
-                <input required type="text" placeholder="Trap Name"/><br/>
-                <label for="risk">Risk Level:</label>
+            <form id="moveForm" onSubmit={submitMove} encType="multipart/form-data">
+                <input id="name" required type="text" placeholder="Trap Name"/><br/>
+                <label htmlFor="risk">Risk Level:</label>
                 <select id="risk" name="risklist" form="moveForm">
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
                     <option value="high">High</option>=
                 </select><br/>
-                <label for="reward">Reward Level:</label>
+                <label htmlFor="reward">Reward Level:</label>
                 <select id="reward" name="rewardlist" form="moveForm">
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
                     <option value="high">High</option>
                 </select><br/>
-                <label for="color">Color to Play:</label>
+                <label htmlFor="color">Color to Play:</label>
                 <select id="color" name="colorlist" form="moveForm">
                     <option value="white">White</option>
                     <option value="black">Black</option>
                 </select><br/>
-                <input required type="text" placeholder="Piece Initial Position"/><br/>
-                <input required type="text" placeholder="Piece Final Position"/><br/>
+                <input required id="pos1" type="text" placeholder="Piece Initial Position"/><br/>
+                <input required id="pos2" type="text" placeholder="Piece Final Position"/><br/>
                 <input required type="submit" value="Submit"/>
             </form>
         </div>
@@ -39,11 +40,34 @@ class CreateMove extends Component {
   }
 }
 
-const submitMove = (form) => {
-    // get form.data stored into a variable
-    // use axios like getMove.js does, store form.data in the request
+const submitMove = (e) => {
+    // prevent refresh on submit
+    e.preventDefault();
+    // get form.data stored into variable "formData"
+    var elements = document.getElementById("moveForm").elements;
+    var formData = {};
+    for(var i = 0; i < elements.length; i++){
+        var item = elements[i];
+        formData[item.id] = item.value;
+    }
+    //console.log(formData);
+
+    //use axios like getMove.js does, store form.data in the request
+    //posts data to test server
+    return axios({method: 'post', url: `https://httpbin.org/anything`,
+        data: {
+            formData
+        }
+    })
+    .then((response) => {
+        console.log(response);
+        return response
+    }, (error) => {
+        return error;
+    });
     // wait for the api call to finish and return data
-    // then take the data, 
+    
+    // then take the data,
 }
 
 export default CreateMove;
