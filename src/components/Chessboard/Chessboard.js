@@ -30,6 +30,7 @@ class Chessboard extends Component {
     }
     // allows setPosition's "this" calls to always refer to the chessboard object
     this.setPosition = this.setPosition.bind(this);
+    this.hashPosition = this.hashPosition.bind(this);
   }
 
   // marks a position as either initial or final state
@@ -52,10 +53,11 @@ class Chessboard extends Component {
                                     [r,c]);
       ///what is this magic below
       console.log(newBoard);
-      getMove().then((response) => {
+      getMove(this.hashPosition()).then((response) => {
         console.log(response);
       })
       this.setState({initialPosition: null, piecePositions: newBoard})
+      // need setState to modify state, this won't work
       this.state.auxBoardState[2]=(this.state.auxBoardState[2]+1)%2
       console.log(this.hashPosition())
       isWhiteKingInCheck(this.state.piecePositions, this.state.auxBoardState);
