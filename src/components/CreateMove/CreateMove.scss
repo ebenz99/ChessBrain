@@ -1,6 +1,20 @@
 .newMoveFormContainer {
-    height: 50%;
-    float: left;
+    width: 80%;
     height: 100%;
     background-color: green;
+    display: block;
+}
+
+input {
+    margin-bottom: 5%;
+}
+
+select {
+    margin-bottom: 5%;
+}
+
+form {
+    margin-right: 5%;
+    padding-top: 50%;
+    color: white;
 }

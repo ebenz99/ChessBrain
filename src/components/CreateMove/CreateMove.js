@@ -11,20 +11,27 @@ class CreateMove extends Component {
   render() {
     return (
         <div className='newMoveFormContainer'>
-            <form>
-                <input required type="text"/>Trap Name
-                <label for="cars">Choose a car:</label>
-                <select id="cars" name="carlist" form="carform">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="opel">Opel</option>
-                    <option value="audi">Audi</option>
-                </select>
-                <input required type="radio"/>Risk Level
-                <input required type="radio"/>Reward Level
-                <input required type="radio"/>Color to Play
-                <input required type="text"/>Piece Initial Position
-                <input required type="text"/>Piece Final Position
+            <form id="moveForm">
+                <input required type="text" placeholder="Trap Name"/><br/>
+                <label for="risk">Risk Level:</label>
+                <select id="risk" name="risklist" form="moveForm">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>=
+                </select><br/>
+                <label for="reward">Reward Level:</label>
+                <select id="reward" name="rewardlist" form="moveForm">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select><br/>
+                <label for="color">Color to Play:</label>
+                <select id="color" name="colorlist" form="moveForm">
+                    <option value="white">White</option>
+                    <option value="black">Black</option>
+                </select><br/>
+                <input required type="text" placeholder="Piece Initial Position"/><br/>
+                <input required type="text" placeholder="Piece Final Position"/><br/>
                 <input required type="submit" value="Submit"/>
             </form>
         </div>
