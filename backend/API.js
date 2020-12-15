@@ -42,10 +42,11 @@ exports.handler = async (event) => {
     const response = {
         "isBase64Encoded": false,
         "statusCode": 200,
-        "headers": {
-            "Access-Control-Allow-Headers" : "Content-Type",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "OPTIONS,GET"
+        headers: {
+            'Access-Control-Allow-Origin' : '*',
+            'Access-Control-Allow-Headers':'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+            'Access-Control-Allow-Credentials' : true,
+            'Content-Type': 'application/json'
         },
         "body": status
     }
