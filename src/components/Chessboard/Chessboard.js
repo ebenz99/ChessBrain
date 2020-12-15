@@ -156,4 +156,6 @@ class Chessboard extends Component {
   }
 }
 
+
+
 export default Chessboard;
