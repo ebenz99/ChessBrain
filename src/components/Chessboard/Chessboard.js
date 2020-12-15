@@ -55,6 +55,9 @@ class Chessboard extends Component {
       })
       this.setState({initialPosition: null, piecePositions: newBoard})
       console.log(this.hashPosition())
+      console.log(helperFunctions.isWhiteKingInCheck(this.state.piecePositions));
+      console.log(helperFunctions.isBlackKingInCheck(this.state.piecePositions));
+
     }
     else {
       // otherwise set this as the initial if it isn't blank
@@ -127,7 +130,7 @@ class Chessboard extends Component {
   hashPosition(){
     let stateString = this.state.piecePositions.toString()+
     this.state.auxBoardState.toString();
-    
+
     return this.hashCode(stateString);
   }
 

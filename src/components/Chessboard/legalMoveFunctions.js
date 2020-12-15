@@ -3,7 +3,6 @@ import _ from 'lodash';
 
 //helper function to see if a square has black, white, or no piece
 export function squareHasPiece(board, position){
-  console.log(position)
   return board[position[0]][position[1]][0];
 }
 
@@ -83,7 +82,6 @@ export function whiteRookLegalMove(board, initialPosition, finalPosition){
   let cDirection = 0;
 
   if(!((finalPosition[0]-initialPosition[0] === 0) ||(finalPosition[1]-initialPosition[1] === 0))){
-    console.log("trivially false");
     return false;
   }
 
@@ -101,8 +99,6 @@ export function whiteRookLegalMove(board, initialPosition, finalPosition){
     }
   }
 
-  console.log(rDirection + ", " + cDirection);
-
   let noBlockingPiece = true;
 
 
@@ -113,7 +109,6 @@ export function whiteRookLegalMove(board, initialPosition, finalPosition){
         [ initialPosition[0] + i*rDirection, initialPosition[1]])!== 2) {
           noBlockingPiece = false;
       }
-      console.log(noBlockingPiece);
     }
   }else{
     for (let i = 1; i<Math.abs(finalPosition[1]-initialPosition[1]); i++){
@@ -122,7 +117,6 @@ export function whiteRookLegalMove(board, initialPosition, finalPosition){
         [ initialPosition[0], initialPosition[1]+i*cDirection])!== 2) {
           noBlockingPiece = false;
       }
-      console.log(noBlockingPiece);
     }
   }
 
@@ -225,26 +219,23 @@ export function blackRookLegalMove(board, initialPosition, finalPosition){
   let cDirection = 0;
 
   if(!((finalPosition[0]-initialPosition[0] === 0) ||(finalPosition[1]-initialPosition[1] === 0))){
-    console.log("trivially false");
     return false;
   }
 
   if (finalPosition[0]-initialPosition[0]===0){
-    if(finalPosition[0]-initialPosition[0]>0){
+    if(finalPosition[1]-initialPosition[1]>0){
       cDirection = 1;
     }else{
       cDirection = -1;
     }
   }else{
-    if(finalPosition[1]-initialPosition[1]>0){
+    if(finalPosition[0]-initialPosition[0]>0){
       rDirection = 1;
     }else{
       rDirection = -1;
     }
   }
   let noBlockingPiece = true;
-
-  console.log(rDirection + ", " + cDirection);
 
   if (rDirection !== 0){
     for (let i = 1; i<Math.abs(finalPosition[0]-initialPosition[0]); i++){
@@ -253,7 +244,6 @@ export function blackRookLegalMove(board, initialPosition, finalPosition){
         [ initialPosition[0] + i*rDirection, initialPosition[1]])!== 2) {
           noBlockingPiece = false;
       }
-                          console.log(noBlockingPiece);
     }
   }else{
     for (let i = 1; i<Math.abs(finalPosition[1]-initialPosition[1]); i++){
@@ -262,7 +252,6 @@ export function blackRookLegalMove(board, initialPosition, finalPosition){
         [ initialPosition[0], initialPosition[1]+i*cDirection])!== 2) {
           noBlockingPiece = false;
       }
-                          console.log(noBlockingPiece);
     }
   }
 
@@ -300,6 +289,68 @@ export function legalMove(board, piece, color, initialPosition, finalPosition){
 }
 
 //////
-export function augmentBoard(){
-  
+export function augmentBoard(board, {}){
+
+}
+
+export function isWhiteKingInCheck(board) {
+
+  let kingCoordinates = [-1,-1]
+  for (let i=0; i<8; i++){
+    for(let j=0; j<8; j++){
+      if (_.isEqual(board[i][j], [0,10])){
+        kingCoordinates = [i,j];
+      }
+    }
+  }
+
+  if (_.isEqual(kingCoordinates,[-1,-1])){
+    console.log("king not found");
+    return false;
+  }
+
+  let kingInCheck = false;
+  for (let i=0; i<8; i++){
+    for(let j=0; j<8; j++){
+      if (board[i][j][0]===1){
+        kingInCheck = blackLegalMove(board, board[i][j][1], [i,j], kingCoordinates);
+        if (kingInCheck){
+          console.log("white king is in check");
+          return true;
+        }
+      }
+    }
+  }
+  return kingInCheck;
+}
+
+export function isBlackKingInCheck(board) {
+
+  let kingCoordinates = [-1,-1]
+  for (let i=0; i<8; i++){
+    for(let j=0; j<8; j++){
+      if (_.isEqual(board[i][j], [1,10])){
+        kingCoordinates = [i,j];
+      }
+    }
+  }
+
+  if (_.isEqual(kingCoordinates,[-1,-1])){
+    console.log("king not found");
+    return false;
+  }
+
+  let kingInCheck = false;
+  for (let i=0; i<8; i++){
+    for(let j=0; j<8; j++){
+      if (board[i][j][0]===0){
+        kingInCheck = whiteLegalMove(board, board[i][j][1], [i,j],kingCoordinates);
+        if (kingInCheck){
+          console.log("black king is in check");
+          return true;
+        }
+      }
+    }
+  }
+  return kingInCheck;
 }
