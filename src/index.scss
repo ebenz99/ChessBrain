@@ -4,6 +4,7 @@
   --dark-square: rgb(120, 155, 87);
   --dark-square-hover: rgb(93, 121, 67);
   --selected-square: rgb(221, 155, 13);
+  --bg-color-dark: #282c34;
 }
 
 body {
@@ -13,6 +14,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color-dark);
 }
 
 code {
