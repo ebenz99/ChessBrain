@@ -54,10 +54,9 @@ const submitMove = (e) => {
 
     //use axios like getMove.js does, store form.data in the request
     //posts data to test server
-    return axios({method: 'post', url: `https://e5nuoi3g98.execute-api.us-east-1.amazonaws.com/Test`,
-        data: {
-            formData
-        }
+    return axios({method: "post", url: "https://e5nuoi3g98.execute-api.us-east-1.amazonaws.com/Test/postmove", 
+        data: JSON.stringify(formData),
+        headers: {'Content-Type': 'application/json' }
     })
     .then((response) => {
         console.log(response);

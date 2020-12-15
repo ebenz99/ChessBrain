@@ -18,7 +18,7 @@ exports.handler = async (event) => {
 let AWS = require('aws-sdk');
 let dynamodb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
 
-exports.handler = async (event) => {
+exports.handler = (event, context, callback) => {
     let status;     // returned later to tell client if their request workeds
     let tableName = "ChessBrainTraps";   
     // all just test info for now
@@ -34,22 +34,21 @@ exports.handler = async (event) => {
     dynamodb.putItem({
         "TableName": tableName,
         "Item" : item
-    }, (err) => { status = 'bad';
-    }, (success) => { status = JSON.stringify(event); 
+    }, (err) => { context.done(err);
+    }, (success) => { status = 'good'; 
     });
 
     // returns a response to the API Gateway that it can understand/expect
     const response = {
         "isBase64Encoded": false,
         "statusCode": 200,
+        "body": {"data":JSON.stringify(event)},
         headers: {
             'Access-Control-Allow-Origin' : '*',
             'Access-Control-Allow-Headers':'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
             'Access-Control-Allow-Credentials' : true,
             'Content-Type': 'application/json'
         },
-        "body": status
     }
-    return response;
+    callback(null, response);
 };
-
