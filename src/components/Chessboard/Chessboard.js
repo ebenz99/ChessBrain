@@ -23,6 +23,7 @@ class Chessboard extends Component {
           [[0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1]],
           [[0,5], [0,3], [0,4], [0,9], [0,10], [0,4], [0,3], [0,5]]
         ],
+        // [if W can castle, if B can castle, who's turn, can a pawn be taken en passant]
         auxBoardState: [true,true,0,null],
         initialPosition: null,
     }

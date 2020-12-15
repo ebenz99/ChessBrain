@@ -19,8 +19,7 @@ export function whiteKingLegalMove(board, initialPosition, finalPosition, auxBoa
 
     return (squareHasPiece(board, [7,5])=== 2) && (squareHasPiece(board, [7,6]) ===2);
   }else if (_.isEqual(finalPosition,[7,2]) && whiteCanCastle){
-    return (squareHasPiece(board, [7,0])=== 2) &&
-            (squareHasPiece(board, [7,1]) === 2) &&
+    return (squareHasPiece(board, [7,1]) === 2) &&
             (squareHasPiece(board, [7,2]) === 2) &&
             (squareHasPiece(board, [7,3]) === 2);
   }
@@ -165,14 +164,13 @@ export function blackKingLegalMove(board, initialPosition, finalPosition, auxBoa
 
   let blackCanCastle = auxBoardState[1];
   //seperate logic for castling
-  if (_.isEqual(finalPosition, [6,0]) && blackCanCastle){
+  if (_.isEqual(finalPosition, [0,6]) && blackCanCastle){
     console.log("in correct conditional");
-    return (squareHasPiece(board, [5,0])=== 2) && (squareHasPiece(board, [6,0]) ==2);
-  }else if (_.isEqual(finalPosition, [2,0]) && blackCanCastle){
-    return (squareHasPiece(board, [0,0])=== 2) &&
-            (squareHasPiece(board, [1,0]) === 2) &&
-            (squareHasPiece(board, [2,0]) === 2) &&
-            (squareHasPiece(board, [3,0]) === 2);
+    return (squareHasPiece(board, [0,5])=== 2) && (squareHasPiece(board, [0,6]) ==2);
+  }else if (_.isEqual(finalPosition, [0,2]) && blackCanCastle){
+    return (squareHasPiece(board, [0,1]) === 2) &&
+            (squareHasPiece(board, [0,2]) === 2) &&
+            (squareHasPiece(board, [0,3]) === 2);
   }
 
   // main logic
