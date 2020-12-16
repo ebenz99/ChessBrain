@@ -74,5 +74,5 @@ export function blackCastlesQueenside(board){
 
 export function whiteTakesEnPassant(board, initialPosition, finalPosition) {
   let board1 = replaceSquare(board, initialPosition, BLANK_SQUARE);
-  let board2 = replaceSquare(board1, initialPosition)
+  let board2 = replaceSquare(board1, initialPosition);
 }
