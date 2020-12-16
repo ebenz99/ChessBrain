@@ -36,6 +36,8 @@ class CreateMove extends Component {
                 <input required id="pos2" type="text" placeholder="Piece Final Position"/><br/>
                 <input required type="submit" value="Submit"/>
             </form>
+
+            <p>"Board state hash is :" + {this.props.boardState}</p>
         </div>
     );
   }

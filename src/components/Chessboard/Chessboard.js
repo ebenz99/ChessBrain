@@ -142,10 +142,11 @@ class Chessboard extends Component {
     return hash;
 }
   hashPosition(){
-    let stateString = this.state.piecePositions.toString()+
+    let stateString = this.state.piecePositions.toString()+'|'+
     this.state.auxBoardState.toString();
-
-    return this.hashCode(stateString);
+    let result = this.hashCode(stateString);
+    this.props.callbackFunction(result);
+    return result;
   }
 
   // rendering the chessboard means displaying the result HTML from buildBoard()
