@@ -12,7 +12,13 @@ class Chessboard extends Component {
     super(props);
     // initial state is resting state of the board, this will change
     // piece positions are encoded as [<color>, <pieceName>] (mappings for these numbers can be found in the src/constants.js file)
+
+    //temporarily set the best move as "takes";
+    console.log("runnign correclty here");
+    this.props.setBestMove("takes takes takes and then takes");
+
     this.state={
+
       piecePositions:
         [
           [[1,5], [1,3], [1,4], [1,9], [1,10], [1,4], [1,3], [1,5]],
