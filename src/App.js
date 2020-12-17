@@ -10,14 +10,16 @@ function App() {
   const [bestMove, setBestMove] = useState(0);
   return (
     <div className="App">
-      <div className="boardComponentContainer" >
+      <div className="leftSide" >
         < Chessboard  callbackFunction = {setHash} setBestMove = {setBestMove} />
       </div>
-      <div className="formComponentContainer" >
-        < CreateMove boardState = {positionHash}/>
-      </div>
-      <div className = "infoComponentContainer">
-        <InformationPanel  bestMove = {bestMove}/>
+      <div className="rightSide">
+        <div className = "infoComponentContainer">
+          <InformationPanel  bestMove = {bestMove}/>
+        </div>
+        <div className="formComponentContainer" >
+          < CreateMove boardState = {positionHash}/>
+        </div>
       </div>
     </div>
   );
