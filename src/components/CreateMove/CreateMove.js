@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './CreateMove.scss';
+import {BACKEND_ENDPOINT} from "../../constants.js"
 import axios from 'axios';
 
 class CreateMove extends Component {
@@ -35,6 +36,8 @@ class CreateMove extends Component {
                 <input required id="pos2" type="text" placeholder="Piece Final Position"/><br/>
                 <input required type="submit" value="Submit"/>
             </form>
+
+            <p>"Board state hash is :" + {this.props.boardState}</p>
         </div>
     );
   }
@@ -50,11 +53,10 @@ const submitMove = (e) => {
         var item = elements[i];
         formData[item.id] = item.value;
     }
-    //console.log(formData);
 
     //use axios like getMove.js does, store form.data in the request
     //posts data to test server
-    return axios({method: "post", url: "https://e5nuoi3g98.execute-api.us-east-1.amazonaws.com/Test/postmove", 
+    return axios({method: "post", url: `${BACKEND_ENDPOINT}postmove`,
         data: JSON.stringify(formData),
         headers: {'Content-Type': 'application/json' }
     })
@@ -65,7 +67,7 @@ const submitMove = (e) => {
         return error;
     });
     // wait for the api call to finish and return data
-    
+
     // then take the data,
 }
 

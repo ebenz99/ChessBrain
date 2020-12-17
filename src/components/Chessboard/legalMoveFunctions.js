@@ -9,16 +9,10 @@ export function squareHasPiece(board, position){
 // the following functions are called in whiteLegalMove() depending on the piece
 export function whiteKingLegalMove(board, initialPosition, finalPosition, auxBoardState){
   let whiteCanCastle = auxBoardState[0];
-  //seperate logic for castling
-  // console.log(finalPosition);
-  // console.log(_.isEqual(finalPosition, [7,6])+"::");
-  if (_.isEqual(finalPosition, [7,6]) && whiteCanCastle){
-    // console.log("in correct conditional");
-    // console.log((squareHasPiece(board, [7,5]) === 2));
-    // console.log((squareHasPiece(board, [6,7]) ===2));
 
+  if (_.isEqual(finalPosition, [7,6]) && _.isEqual(initialPosition, [7,4]) &&  whiteCanCastle){
     return (squareHasPiece(board, [7,5])=== 2) && (squareHasPiece(board, [7,6]) ===2);
-  }else if (_.isEqual(finalPosition,[7,2]) && whiteCanCastle){
+  }else if (_.isEqual(finalPosition,[7,2]) && _.isEqual(initialPosition, [7,4]) && whiteCanCastle){
     return (squareHasPiece(board, [7,1]) === 2) &&
             (squareHasPiece(board, [7,2]) === 2) &&
             (squareHasPiece(board, [7,3]) === 2);
@@ -164,10 +158,10 @@ export function blackKingLegalMove(board, initialPosition, finalPosition, auxBoa
 
   let blackCanCastle = auxBoardState[1];
   //seperate logic for castling
-  if (_.isEqual(finalPosition, [0,6]) && blackCanCastle){
+  if (_.isEqual(finalPosition, [0,6]) && _.isEqual(initialPosition, [0,4]) && blackCanCastle){
     // console.log("in correct conditional");
     return (squareHasPiece(board, [0,5])=== 2) && (squareHasPiece(board, [0,6]) ===2);
-  }else if (_.isEqual(finalPosition, [0,2]) && blackCanCastle){
+  }else if (_.isEqual(finalPosition, [0,2]) && _.isEqual(initialPosition, [0,4]) && blackCanCastle){
     return (squareHasPiece(board, [0,1]) === 2) &&
             (squareHasPiece(board, [0,2]) === 2) &&
             (squareHasPiece(board, [0,3]) === 2);

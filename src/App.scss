@@ -17,3 +17,25 @@
   padding-left: 5%;
   height: 100vh;
 }
+
+//A terrible attempt on my part to size a canvas diretly over the board
+//currently overlays boardComponentContainer correctly but not the board itself
+/*.canvasOverBoard {
+  background-color: blue;
+  opacity: .3;
+  position: absolute;
+  float: left;
+  width: 50%;
+  height: 80vh;
+  padding-left: 5%;
+  padding-top: 5vw;
+}*/
+
+.infoComponentContainer {
+  background-color: blue;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 40%;
+  text-align: center;
+}

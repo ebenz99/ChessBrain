@@ -12,7 +12,13 @@ class Chessboard extends Component {
     super(props);
     // initial state is resting state of the board, this will change
     // piece positions are encoded as [<color>, <pieceName>] (mappings for these numbers can be found in the src/constants.js file)
+
+    //temporarily set the best move as "takes";
+    console.log("runnign correclty here");
+    this.props.setBestMove("takes takes takes and then takes");
+
     this.state={
+
       piecePositions:
         [
           [[1,5], [1,3], [1,4], [1,9], [1,10], [1,4], [1,3], [1,5]],
@@ -142,10 +148,11 @@ class Chessboard extends Component {
     return hash;
 }
   hashPosition(){
-    let stateString = this.state.piecePositions.toString()+
+    let stateString = this.state.piecePositions.toString()+'|'+
     this.state.auxBoardState.toString();
-
-    return this.hashCode(stateString);
+    let result = this.hashCode(stateString);
+    this.props.callbackFunction(result);
+    return result;
   }
 
   // rendering the chessboard means displaying the result HTML from buildBoard()
