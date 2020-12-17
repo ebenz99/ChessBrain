@@ -7,13 +7,39 @@ class CreateMove extends Component {
   constructor(props) {
     super(props);
     this.state = {}
-    // this.wasClicked = this.wasClicked.bind(this);
+    this.submitMove = this.submitMove.bind(this);
   }
+
+    submitMove = (e) => {
+        // prevent refresh on submit
+        e.preventDefault();
+        // get form.data stored into variable "formData"
+        var elements = document.getElementById("moveForm").elements;
+        var formData = {};
+        for(var i = 0; i < elements.length; i++){
+            var item = elements[i];
+            formData[item.id] = item.value;
+        }
+        formData.board = this.props.boardState.toString();
+
+        //use axios like getMove.js does, store form.data in the request
+        //posts data to test server
+        return axios({method: "post", url: `${BACKEND_ENDPOINT}postmove`,
+            data: JSON.stringify(formData),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then((response) => {
+            console.log(response);
+            return response
+        }, (error) => {
+            return error;
+        });
+    }
 
   render() {
     return (
         <div className='newMoveFormContainer'>
-            <form id="moveForm" onSubmit={submitMove} encType="multipart/form-data">
+            <form id="moveForm" onSubmit={this.submitMove} encType="multipart/form-data">
                 <input id="name" required type="text" placeholder="Trap Name"/><br/>
                 <label htmlFor="risk">Risk Level:</label>
                 <select id="risk" name="risklist" form="moveForm">
@@ -32,6 +58,8 @@ class CreateMove extends Component {
                     <option value="white">White</option>
                     <option value="black">Black</option>
                 </select><br/>
+                <label htmlFor="desc">Description:</label><br/>
+                <textarea required id='desc' name="dexc" rows="10" cols="30"></textarea>
                 <input required id="pos1" type="text" placeholder="Piece Initial Position"/><br/>
                 <input required id="pos2" type="text" placeholder="Piece Final Position"/><br/>
                 <input required type="submit" value="Submit"/>
@@ -41,34 +69,6 @@ class CreateMove extends Component {
         </div>
     );
   }
-}
-
-const submitMove = (e) => {
-    // prevent refresh on submit
-    e.preventDefault();
-    // get form.data stored into variable "formData"
-    var elements = document.getElementById("moveForm").elements;
-    var formData = {};
-    for(var i = 0; i < elements.length; i++){
-        var item = elements[i];
-        formData[item.id] = item.value;
-    }
-
-    //use axios like getMove.js does, store form.data in the request
-    //posts data to test server
-    return axios({method: "post", url: `${BACKEND_ENDPOINT}postmove`,
-        data: JSON.stringify(formData),
-        headers: {'Content-Type': 'application/json' }
-    })
-    .then((response) => {
-        console.log(response);
-        return response
-    }, (error) => {
-        return error;
-    });
-    // wait for the api call to finish and return data
-
-    // then take the data,
 }
 
 export default CreateMove;

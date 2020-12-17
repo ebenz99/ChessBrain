@@ -24,11 +24,21 @@ exports.handler = (event, context, callback) => {
     // all just test info for now
     let item = {
         "board": 
-            {S: event.body.name}, //DDB needs data types for some reason, for more info, check out https://stackoverflow.com/questions/33942945/error-invalidparametertype-expected-params-itempid-to-be-a-structure-in-dyn
+            {S: event.body.board}, //DDB needs data types for some reason, for more info, check out https://stackoverflow.com/questions/33942945/error-invalidparametertype-expected-params-itempid-to-be-a-structure-in-dyn
         "trap": 
             {S: event.body.name},
+        "risk": 
+            {S: event.body.risk},
+        "reward": 
+            {S: event.body.reward},
         "colorToPlay": 
             {S: event.body.color},
+        "desc": 
+            {S: event.body.desc},
+        "initialPosition": 
+            {S: event.body.pos1},
+        "finalPosition": 
+            {S: event.body.pos2},
     }
     // Puts the item into the table and updates the status accordingly
     dynamodb.putItem({
