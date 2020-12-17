@@ -37,29 +37,29 @@ class CreateMove extends Component {
 
   render() {
     return (
-        <form className="moveForm" onSubmit={this.submitMove} encType="multipart/form-data">
+        <form id="moveForm" onSubmit={this.submitMove} encType="multipart/form-data">
             <div className='formTitle'>
                 <h2>Create Trap</h2>
             </div>
             <div className="moveFormDiv">
                 <div className='inputDiv'>
-                    <label htmlFor="risk">Trap Name:</label>
+                    <label className="formLabel" htmlFor="risk">Trap Name:</label>
                     <input className="formInput" id="name" required type="text" placeholder="Trap Name"/><br/>
                 </div>
                 <div className='inputDiv'>
-                <label htmlFor="desc">Description:</label><br/>
-                    <textarea required id='desc' name="dexc" rows="7" cols="30"></textarea>
-                </div>
+                    <label className="formLabel" htmlFor="desc">Description:</label><br/>
+                        <textarea required id='desc' name="dexc" rows="7" cols="30"></textarea>
+                    </div>
                 <div className='inputDiv'>
-                    <label htmlFor="reward">Initial Piece Position</label>
+                    <label className="formLabel" htmlFor="reward">Initial Piece Position</label>
                     <input className="formInput" required id="pos1" type="text" placeholder="f7, Ke1, etc."/><br/>
                 </div>
                 <div className='inputDiv'>
-                    <label htmlFor="reward">Final Piece Position</label>
+                    <label className="formLabel" htmlFor="reward">Final Piece Position</label>
                     <input className="formInput" required id="pos2" type="text" placeholder="f6, e2, etc."/><br/>
                 </div>
                 <div className='inputDiv'>
-                    <label htmlFor="risk">Risk Level:</label>
+                    <label className="formLabel" htmlFor="risk">Risk Level:</label>
                     <select className="formInput" id="risk" name="risklist" form="moveForm">
                         <option value="low">Low</option>
                         <option value="medium">Medium</option>
@@ -67,7 +67,7 @@ class CreateMove extends Component {
                     </select><br/>
                 </div>
                 <div className='inputDiv'>
-                    <label htmlFor="reward">Reward Level:</label>
+                    <label className="formLabel" htmlFor="reward">Reward Level:</label>
                     <select className="formInput" id="reward" name="rewardlist" form="moveForm">
                         <option value="low">Low</option>
                         <option value="medium">Medium</option>
@@ -75,7 +75,7 @@ class CreateMove extends Component {
                     </select><br/>
                 </div>
                 <div className='inputDiv'>
-                    <label htmlFor="color">Color to Play:</label>
+                    <label className="formLabel" htmlFor="color">Color to Play:</label>
                     <select className="formInput" id="color" name="colorlist" form="moveForm">
                         <option value="white">White</option>
                         <option value="black">Black</option>

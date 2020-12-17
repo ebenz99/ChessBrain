@@ -37,7 +37,7 @@ class Chessboard extends Component {
     let stateString = this.state.piecePositions.toString()+'|'+
     this.state.auxBoardState.toString();
     let result = this.hashCode(stateString);
-    this.props.callbackFunction(result);
+    this.props.setPositionHash(result);
   }
 
   // marks a position as either initial or final state
@@ -157,7 +157,7 @@ class Chessboard extends Component {
     let stateString = this.state.piecePositions.toString()+'|'+
     this.state.auxBoardState.toString();
     let result = this.hashCode(stateString);
-    this.props.callbackFunction(result);
+    this.props.setPositionHash(result);
     return result;
   }
 
