@@ -28,9 +28,22 @@ export function whiteKingLegalMove(board, initialPosition, finalPosition, auxBoa
   return result;
 }
 
-export function whitePawnLegalMove(board, initialPosition, finalPosition) {
+export function whitePawnLegalMove(board, initialPosition, finalPosition, auxBoardState) {
   let result = false;
   let intermediary = [initialPosition[0]-1, initialPosition[1]];
+
+  // En Passant stuff
+  if(_.isEqual(auxBoardState[3], [initialPosition[0],initialPosition[1]+1]) &&
+      _.isEqual(finalPosition, [auxBoardState[3][0]-1,auxBoardState[3][1]])){
+    console.log("valid en passant");
+    return true;
+  }
+
+  if(_.isEqual(auxBoardState[3], [initialPosition[0],initialPosition[1]-1]) &&
+      _.isEqual(finalPosition, [auxBoardState[3][0]-1,auxBoardState[3][1]])){
+    console.log("valid en passant");
+    return true;
+  }
 
   if (_.isEqual([initialPosition[0]-2, initialPosition[1]], finalPosition)){
     result = squareHasPiece(board, intermediary) === 2 &&
@@ -140,7 +153,7 @@ export function whiteRookLegalMove(board, initialPosition, finalPosition){
 //called in legalMove() if the piece being evaluated is white
 export function whiteLegalMove(board, piece, initialPosition, finalPosition, auxBoardState){
   let result = false;
-  if (piece === 1) result = whitePawnLegalMove(board, initialPosition, finalPosition)
+  if (piece === 1) result = whitePawnLegalMove(board, initialPosition, finalPosition, auxBoardState)
   else if (piece === 3) result = whiteKnightLegalMove(board, initialPosition, finalPosition)
   else if (piece === 4) result = whiteBishopLegalMove(board, initialPosition, finalPosition)
   else if (piece === 5) result = whiteRookLegalMove(board, initialPosition, finalPosition)
@@ -177,10 +190,22 @@ export function blackKingLegalMove(board, initialPosition, finalPosition, auxBoa
   return result;
 }
 
-export function blackPawnLegalMove(board, initialPosition, finalPosition) {
+export function blackPawnLegalMove(board, initialPosition, finalPosition, auxBoardState) {
 
   let result = false;
   let intermediary = [initialPosition[0]+1, initialPosition[1]];
+
+  if(_.isEqual(auxBoardState[3], [initialPosition[0],initialPosition[1]+1]) &&
+      _.isEqual(finalPosition, [auxBoardState[3][0]+1,auxBoardState[3][1]])){
+    console.log("valid en passant");
+    return true;
+  }
+
+  if(_.isEqual(auxBoardState[3], [initialPosition[0],initialPosition[1]-1]) &&
+      _.isEqual(finalPosition, [auxBoardState[3][0]+1,auxBoardState[3][1]])){
+    console.log("valid en passant");
+    return true;
+  }
 
   if (_.isEqual([initialPosition[0]+2, initialPosition[1]], finalPosition)){
     result = squareHasPiece(board, intermediary) === 2 &&
@@ -288,7 +313,7 @@ export function blackRookLegalMove(board, initialPosition, finalPosition){
 //is called in legal move if the piece being evaluated is black
 export function blackLegalMove(board, piece, initialPosition, finalPosition, auxBoardState){
   let result = false;
-  if (piece === 1) result = blackPawnLegalMove(board, initialPosition, finalPosition)
+  if (piece === 1) result = blackPawnLegalMove(board, initialPosition, finalPosition, auxBoardState)
   else if (piece === 3) result = blackKnightLegalMove(board, initialPosition, finalPosition)
   else if (piece === 4) result = blackBishopLegalMove(board, initialPosition, finalPosition)
   else if (piece === 5) result = blackRookLegalMove(board, initialPosition, finalPosition)

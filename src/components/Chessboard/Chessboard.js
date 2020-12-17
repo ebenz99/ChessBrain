@@ -28,7 +28,7 @@ class Chessboard extends Component {
         ],
         // [if W can castle, if B can castle, who's turn, can a pawn be taken en passant]
         auxBoardState: [true,true,0,null],
-        initialPosition: null,
+        initialPosition: null
     }
     // allows setPosition's "this" calls to always refer to the chessboard object
     this.setPosition = this.setPosition.bind(this);
@@ -55,9 +55,20 @@ class Chessboard extends Component {
         this.state.piecePositions[this.state.initialPosition[0]][this.state.initialPosition[1]][0],
         this.state.initialPosition, [r,c], this.state.auxBoardState) === false){return}
       //otherwise make the move
+      console.log(this.state.auxBoardState);
       let newBoard = pieceMoveFinal(this.state.piecePositions,
                                     this.state.initialPosition,
-                                    [r,c]);
+                                    [r,c], this.state.auxBoardState);
+
+      //make sure the en Passant value is changed
+      let auxBoardStateHelper = this.state.auxBoardState.slice();
+      if (newBoard[r][c][1]===1 && Math.abs(this.state.initialPosition[0]-r) === 2){
+        auxBoardStateHelper[3] = [r,c];
+      }else{
+        auxBoardStateHelper[3] = null;
+      }
+      this.setState({auxBoardState: auxBoardStateHelper});
+
       ///what is this magic below
       getMove(this.hashPosition()).then((response) => {
         this.props.setBestMove(response);
@@ -65,10 +76,10 @@ class Chessboard extends Component {
 
       this.setState({initialPosition: null, piecePositions: newBoard})
 
-      let colorToMove = (this.state.auxBoardState[2]+1)%2;
-      let newAuxBoardState = this.state.auxBoardState.slice();
-      newAuxBoardState[2]=colorToMove;
-      this.setState({auxBoardState: newAuxBoardState});
+      let colorToMove = (auxBoardStateHelper[2]+1)%2;
+      auxBoardStateHelper[2]=colorToMove;
+      this.setState({auxBoardState: auxBoardStateHelper});
+
 
       //isWhiteKingInCheck(this.state.piecePositions, this.state.auxBoardState);
       //isBlackKingInCheck(this.state.piecePositions, this.state.auxBoardState);
