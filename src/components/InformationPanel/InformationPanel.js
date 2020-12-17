@@ -42,7 +42,6 @@ class InformationPanel extends Component {
   };
 
   render(){
-    
     let printStatement = this.printBestMove();
     let n = printStatement.length;
     let html = [];
@@ -58,8 +57,6 @@ class InformationPanel extends Component {
     html.push(<div key = {n+1}></div>)
 
     return html;
-
-
   }
 }
 

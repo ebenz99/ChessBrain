@@ -8,14 +8,14 @@
 .rightSide {
   display: flex;
   flex-direction: column;
-  justify-content: flex-starts;
+  justify-content: flex-start;
   width: 30vw;
   max-height: 90vh;
 }
 
 .formComponentContainer {
-  background-color: #A3CCF4;
   max-width: 30vw;
+  height: 70vh;
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -27,7 +27,4 @@
   max-width: 30vw;
   display: flex;
   flex-direction: column;
-  margin-bottom: 5vh;
-  padding: 10px;
-  flex-shrink: 0;
 }
