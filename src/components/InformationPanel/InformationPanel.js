@@ -42,6 +42,7 @@ class InformationPanel extends Component {
   };
 
   render(){
+<<<<<<< Updated upstream
     let printStatement = this.printBestMove();
     let n = printStatement.length;
     let html = [];
@@ -57,6 +58,18 @@ class InformationPanel extends Component {
     html.push(<div key = {n+1}></div>)
 
     return html;
+=======
+    let stringData = this.props.bestMove.data;
+    console.log(stringData);
+    //let data = JSON.parse(stringData);
+    return(
+      <div>
+      <p> It aint much, but its honest work </p>
+      <p>{JSON.stringify(stringData)}</p>
+      <p> the best moves are {}</p>
+      </div>
+    );
+>>>>>>> Stashed changes
   }
 }
 
