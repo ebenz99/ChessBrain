@@ -1,21 +1,46 @@
-.newMoveFormContainer {
-    width: 80%;
+.moveForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     height: 100%;
-    background-color: green;
-    display: block;
+}
+
+.moveFormDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 5vh;
+}
+
+.inputDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.submitContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 input, textarea {
-    margin-bottom: 5%;
-    width: 15vw;
+    width: 10vw;
 }
 
 select {
-    margin-bottom: 5%;
+    width: 10vw;
 }
 
-form {
-    margin-right: 5%;
-    padding-top: 20%;
-    color: white;
+label {
+    background-color: white;
+    padding: 1vh;
+    border-radius: 10vh;
+    color: var(--bg-color-dark);
+    width: 10vw;
 }
+
+
+

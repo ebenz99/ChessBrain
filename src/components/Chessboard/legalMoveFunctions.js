@@ -312,11 +312,6 @@ export function legalMove(board, piece, color, initialPosition, finalPosition, a
   return result && auxBoardState[2]===color;
 }
 
-//////
-export function augmentBoard(board, {}){
-
-}
-
 export function isWhiteKingInCheck(board, auxBoardState) {
 
   let kingCoordinates = [-1,-1]
