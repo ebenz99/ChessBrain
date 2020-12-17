@@ -1,9 +1,18 @@
-:root {
+/*:root {
   --light-square:rgb(191, 235, 150);
   --light-square-hover:rgb(132, 163, 103);
   --dark-square: rgb(120, 155, 87);
   --dark-square-hover: rgb(93, 121, 67);
   --selected-square: rgb(221, 155, 13);
+  --bg-color-dark: #282c34;
+}*/
+
+:root {
+  --light-square:#A3CCF4;
+  --light-square-hover:#779DC3;
+  --dark-square: #5E656E;
+  --dark-square-hover:#779DC3 ;
+  --selected-square: ;
   --bg-color-dark: #282c34;
 }
 
@@ -21,4 +30,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-

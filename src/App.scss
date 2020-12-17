@@ -10,6 +10,7 @@
   flex-direction: column;
   justify-content: space-between;
   width: 30vw;
+  max-height: 90vh;
 }
 
 .formComponentContainer {
@@ -17,12 +18,13 @@
   height: 70vh;
   display: flex;
   flex-direction: column;
+  padding: 10px;
+  flex-shrink: 1;
 }
 
 .infoComponentContainer {
-  background-color: blue;
+  background-color: #A3CCF4;
   max-width: 30vw;
-  height: 20vh;
   display: flex;
   flex-direction: column;
 }

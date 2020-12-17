@@ -34,6 +34,14 @@ export function pieceMoveFinal(board, initialPosition, finalPosition, auxBoardSt
         _.isEqual(board[initialPosition[0]][initialPosition[1]], [0,1])){
           return whiteTakesEnPassant(board, initialPosition, finalPosition);
         }
+  else if(_.isEqual(auxBoardState[3], [initialPosition[0],initialPosition[1]+1]) &&
+        _.isEqual(board[initialPosition[0]][initialPosition[1]], [1,1])){
+          return blackTakesEnPassant(board, initialPosition, finalPosition);
+        }
+  else if(_.isEqual(auxBoardState[3], [initialPosition[0],initialPosition[1]-1]) &&
+        _.isEqual(board[initialPosition[0]][initialPosition[1]], [1,1])){
+          return blackTakesEnPassant(board, initialPosition, finalPosition);
+        }
 
   return normalPieceMove(board, initialPosition, finalPosition);
 }
@@ -81,5 +89,12 @@ export function whiteTakesEnPassant(board, initialPosition, finalPosition) {
   let board1 = replaceSquare(board, initialPosition, BLANK_SQUARE);
   let board2 = replaceSquare(board1, [3,finalPosition[1]],BLANK_SQUARE);
   let board3 = replaceSquare(board2, finalPosition, [0,1]);
+  return board3;
+}
+
+export function blackTakesEnPassant(board, initialPosition, finalPosition) {
+  let board1 = replaceSquare(board, initialPosition, BLANK_SQUARE);
+  let board2 = replaceSquare(board1, [4,finalPosition[1]],BLANK_SQUARE);
+  let board3 = replaceSquare(board2, finalPosition, [1,1]);
   return board3;
 }
