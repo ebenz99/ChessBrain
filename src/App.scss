@@ -23,10 +23,14 @@
 }
 
 .infoComponentContainer {
-  background-color: #A3CCF4;
+  background-color: var(--light-square);
   max-width: 30vw;
+  height: 70%;
+  max-height: 70%;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  border-radius: 5px;
 }
 
 .toggleContainer {
