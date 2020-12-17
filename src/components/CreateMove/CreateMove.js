@@ -38,14 +38,29 @@ class CreateMove extends Component {
   render() {
     return (
         <form className="moveForm" onSubmit={this.submitMove} encType="multipart/form-data">
+            <div className='formTitle'>
+                <h2>Create Trap</h2>
+            </div>
             <div className="moveFormDiv">
                 <div className='inputDiv'>
                     <label htmlFor="risk">Trap Name:</label>
-                    <input id="name" required type="text" placeholder="Trap Name"/><br/>
+                    <input className="formInput" id="name" required type="text" placeholder="Trap Name"/><br/>
+                </div>
+                <div className='inputDiv'>
+                <label htmlFor="desc">Description:</label><br/>
+                    <textarea required id='desc' name="dexc" rows="7" cols="30"></textarea>
+                </div>
+                <div className='inputDiv'>
+                    <label htmlFor="reward">Initial Piece Position</label>
+                    <input className="formInput" required id="pos1" type="text" placeholder="f7, Ke1, etc."/><br/>
+                </div>
+                <div className='inputDiv'>
+                    <label htmlFor="reward">Final Piece Position</label>
+                    <input className="formInput" required id="pos2" type="text" placeholder="f6, e2, etc."/><br/>
                 </div>
                 <div className='inputDiv'>
                     <label htmlFor="risk">Risk Level:</label>
-                    <select id="risk" name="risklist" form="moveForm">
+                    <select className="formInput" id="risk" name="risklist" form="moveForm">
                         <option value="low">Low</option>
                         <option value="medium">Medium</option>
                         <option value="high">High</option>=
@@ -53,7 +68,7 @@ class CreateMove extends Component {
                 </div>
                 <div className='inputDiv'>
                     <label htmlFor="reward">Reward Level:</label>
-                    <select id="reward" name="rewardlist" form="moveForm">
+                    <select className="formInput" id="reward" name="rewardlist" form="moveForm">
                         <option value="low">Low</option>
                         <option value="medium">Medium</option>
                         <option value="high">High</option>
@@ -61,26 +76,14 @@ class CreateMove extends Component {
                 </div>
                 <div className='inputDiv'>
                     <label htmlFor="color">Color to Play:</label>
-                    <select id="color" name="colorlist" form="moveForm">
+                    <select className="formInput" id="color" name="colorlist" form="moveForm">
                         <option value="white">White</option>
                         <option value="black">Black</option>
                     </select><br/>
                 </div>
-                <div className='inputDiv'>
-                <label htmlFor="desc">Description:</label><br/>
-                    <textarea required id='desc' name="dexc" rows="10" cols="30"></textarea>
-                </div>
-                <div className='inputDiv'>
-                    <label htmlFor="reward">Initial Piece Position</label>
-                    <input required id="pos1" type="text" placeholder="f5, Ke2, etc."/><br/>
-                </div>
-                <div className='inputDiv'>
-                    <label htmlFor="reward">Final Piece Position</label>
-                    <input required id="pos2" type="text" placeholder="f6, Ke3, etc."/><br/>
-                </div>
             </div>
             <div className='submitContainer'>
-                <input required type="submit" value="Submit"/>
+                <input className="submitButton" required type="submit" value="Submit"/>
             </div>
         </form>
     );
