@@ -7,11 +7,11 @@ class InformationPanel extends Component {
     this.state = {}
   }
   render(){
-    console.log(this.props.bestMove);
     return(
       <div>
       <p> It aint much, but its honest work </p>
-      <p> the best move is {this.props.bestMove}</p>
+      <p>{JSON.stringify(this.props.bestMove.data)}</p>
+      <p> the best moves are {}</p>
       </div>
     );
   }

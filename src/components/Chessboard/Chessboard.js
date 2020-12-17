@@ -13,9 +13,7 @@ class Chessboard extends Component {
     // initial state is resting state of the board, this will change
     // piece positions are encoded as [<color>, <pieceName>] (mappings for these numbers can be found in the src/constants.js file)
 
-    //temporarily set the best move as "takes";
-    console.log("runnign correclty here");
-    this.props.setBestMove("takes takes takes and then takes");
+
 
     this.state={
 
@@ -37,6 +35,11 @@ class Chessboard extends Component {
     // allows setPosition's "this" calls to always refer to the chessboard object
     this.setPosition = this.setPosition.bind(this);
     this.hashPosition = this.hashPosition.bind(this);
+
+    let stateString = this.state.piecePositions.toString()+'|'+
+    this.state.auxBoardState.toString();
+    let result = this.hashCode(stateString);
+    this.props.callbackFunction(result);
   }
 
   // marks a position as either initial or final state
@@ -60,9 +63,9 @@ class Chessboard extends Component {
       ///what is this magic below
       // console.log(newBoard);
       getMove(this.hashPosition()).then((response) => {
-        // console.log(response);
-        ;
-      })
+        this.props.setBestMove(response);
+      });
+
       this.setState({initialPosition: null, piecePositions: newBoard})
 
       // need setState to modify state, this won't work
@@ -73,10 +76,9 @@ class Chessboard extends Component {
       let newAuxBoardState = this.state.auxBoardState.slice();
       newAuxBoardState[2]=colorToMove;
       this.setState({auxBoardState: newAuxBoardState});
-      console.log(this.hashPosition())
 
-      isWhiteKingInCheck(this.state.piecePositions, this.state.auxBoardState);
-      isBlackKingInCheck(this.state.piecePositions, this.state.auxBoardState);
+      //isWhiteKingInCheck(this.state.piecePositions, this.state.auxBoardState);
+      //isBlackKingInCheck(this.state.piecePositions, this.state.auxBoardState);
 
     }
     else {
