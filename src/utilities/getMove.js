@@ -8,6 +8,7 @@ const getMove = (boardStateHash) => {
         }
     })
     .then((response) => {
+        console.log(response)
         return response
     }, (error) => {
         return error;
