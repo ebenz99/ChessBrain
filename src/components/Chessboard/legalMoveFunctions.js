@@ -309,7 +309,6 @@ export function legalMove(board, piece, color, initialPosition, finalPosition, a
   }else if (color === 1){
     result = blackLegalMove(board, piece, initialPosition, finalPosition, auxBoardState);
   }
-  // console.log("move is legal: "+result);
   return result && auxBoardState[2]===color;
 }
 
@@ -369,7 +368,7 @@ export function isBlackKingInCheck(board, auxBoardState) {
       if (board[i][j][0]===0){
         kingInCheck = whiteLegalMove(board, board[i][j][1], [i,j],kingCoordinates, auxBoardState);
         if (kingInCheck){
-          // console.log("black king is in check");
+          // .log("black king is in check");
           return true;
         }
       }
