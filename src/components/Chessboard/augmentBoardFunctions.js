@@ -9,9 +9,6 @@ export function replaceSquare(board, position, piece){
 }
 
 export function pieceMoveFinal(board, initialPosition, finalPosition){
-  console.log(_.isEqual(board[initialPosition[0]][initialPosition[1]], [0,10]));
-  console.log(  _.isEqual(initialPosition, [7,4]));
-  console.log(_.isEqual(finalPosition, [7,6]));
 
   if (_.isEqual(board[initialPosition[0]][initialPosition[1]], [0,10]) &&
         _.isEqual(initialPosition, [7,4]) &&
