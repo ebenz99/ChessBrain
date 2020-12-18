@@ -1,3 +1,10 @@
 .infoContentContainer {
-    padding: 1vh;
+    width: inherit;
+    position: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.trapBox {
+    border: 1px solid black;
 }

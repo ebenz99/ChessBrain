@@ -30,6 +30,7 @@ class InformationPanel extends Component {
           }
           //print each trap from list of attributes
           for (let i = 0; i < n; i++) {
+              console.log(i);
               printStatement.push(traps[i]+" ("+
                                risks[i]+" risk, "+
                                rewards[i]+" reward): "+
@@ -51,7 +52,7 @@ class InformationPanel extends Component {
               </div>)
     //print each trap with an empty line between
     for (let i = 0; i < n; i++) {
-        html.push(<div key = {i+1}><p>{printStatement[i]}</p></div>)
+        html.push(<div className='trapBox' key={i+1}><p>{printStatement[i]}</p></div>)
     }
     //end of html
     html.push(<div key = {n+1}></div>);

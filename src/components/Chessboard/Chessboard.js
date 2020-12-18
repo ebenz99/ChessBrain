@@ -55,7 +55,6 @@ class Chessboard extends Component {
         this.state.piecePositions[this.state.initialPosition[0]][this.state.initialPosition[1]][0],
         this.state.initialPosition, [r,c], this.state.auxBoardState) === false){return}
       //otherwise make the move
-      console.log(this.state.auxBoardState);
       let newBoard = pieceMoveFinal(this.state.piecePositions,
                                     this.state.initialPosition,
                                     [r,c], this.state.auxBoardState);

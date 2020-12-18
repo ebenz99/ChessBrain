@@ -35,13 +35,13 @@ export function whitePawnLegalMove(board, initialPosition, finalPosition, auxBoa
   // En Passant stuff
   if(_.isEqual(auxBoardState[3], [initialPosition[0],initialPosition[1]+1]) &&
       _.isEqual(finalPosition, [auxBoardState[3][0]-1,auxBoardState[3][1]])){
-    console.log("valid en passant");
+    // console.log("valid en passant");
     return true;
   }
 
   if(_.isEqual(auxBoardState[3], [initialPosition[0],initialPosition[1]-1]) &&
       _.isEqual(finalPosition, [auxBoardState[3][0]-1,auxBoardState[3][1]])){
-    console.log("valid en passant");
+    // console.log("valid en passant");
     return true;
   }
 
@@ -197,13 +197,13 @@ export function blackPawnLegalMove(board, initialPosition, finalPosition, auxBoa
 
   if(_.isEqual(auxBoardState[3], [initialPosition[0],initialPosition[1]+1]) &&
       _.isEqual(finalPosition, [auxBoardState[3][0]+1,auxBoardState[3][1]])){
-    console.log("valid en passant");
+    // console.log("valid en passant");
     return true;
   }
 
   if(_.isEqual(auxBoardState[3], [initialPosition[0],initialPosition[1]-1]) &&
       _.isEqual(finalPosition, [auxBoardState[3][0]+1,auxBoardState[3][1]])){
-    console.log("valid en passant");
+    // console.log("valid en passant");
     return true;
   }
 
