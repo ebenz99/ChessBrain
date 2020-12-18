@@ -9,7 +9,7 @@ class InformationPanel extends Component {
   }
 
   printBestMove = () => {
-      let printStatement = [];
+      let items = [];
       //get data from props
       if(this.props.bestMove.data) {
           let n = this.props.bestMove.data.length;
@@ -30,29 +30,41 @@ class InformationPanel extends Component {
           }
           //print each trap from list of attributes
           for (let i = 0; i < n; i++) {
-              console.log(i);
-              printStatement.push(traps[i]+" ("+
-                               risks[i]+" risk, "+
-                               rewards[i]+" reward): "+
-                               initialPos[i]+" -> "+
-                               finalPos[i],
-                               descs[i]);
+              items.push({ 
+                  name: traps[i],
+                  risk: risks[i],
+                  reward: rewards[i],
+                  initialPos: initialPos[i],
+                  finalPos: finalPos[i],
+                  desc: descs[i],
+              });
           }
       }
-      return printStatement;
+      return items;
   };
 
   render(){
-    let printStatement = this.printBestMove();
-    let n = printStatement.length;
+    let traps = this.printBestMove();
+    let n = traps.length;
     let html = [];
-    //begin html
-    html.push(<div key = {0}>
-              <p> It aint much, but its honest work </p>
-              </div>)
+    let arrow = " -> "
     //print each trap with an empty line between
     for (let i = 0; i < n; i++) {
-        html.push(<div className='trapBox' key={i+1}><p>{printStatement[i]}</p></div>)
+      console.log(traps[i].name);
+        html.push(
+          <div className='trapBox' key={i+1}>
+            <div className='trapBorderExperiment'>
+              <div className='trapContent'>
+                <h4 className='trapTitle'>{traps[i].name}</h4>
+                <div className='trapInfoContainer'> 
+                  <p className='trapInfo'>{traps[i].initialPos}{arrow}{traps[i].finalPos}</p>
+                  <p className="trapInfo">Risk: {traps[i].risk}, Reward: {traps[i].reward}  </p>
+                  <p className="trapInfo">{traps[i].desc}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
     }
     //end of html
     html.push(<div key = {n+1}></div>);
