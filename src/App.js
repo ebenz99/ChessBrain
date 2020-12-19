@@ -11,6 +11,8 @@ function App() {
   const [positionHash, setHash] = useState(0);
   const [bestMove, setBestMove] = useState(0);
   const [viewOrCreate, setViewOrCreate] = useState(true);
+  const [colorToMove, setColorToMove] = useState(0);
+  const [whiteOrBlack, setWhiteOrBlack] = useState(true);
   const [status, setStatus] = useState(null);
 
   return (
@@ -18,19 +20,22 @@ function App() {
       <StatusBox status={status}/>
       <div className="App">
         <div className="leftSide" >
-          < Chessboard  setPositionHash={setHash} setBestMove={setBestMove} />
+          < Chessboard  setPositionHash={setHash} setBestMove={setBestMove} setColorToMove = {setColorToMove}/>
         </div>
         <div className="rightSide">
+        <div className="toggleContainer">
+          <ToggleSwitch id='functionToggle2' checked={whiteOrBlack} onChange={setWhiteOrBlack} optionLabels = {['white','black']}/>
+        </div>
           {viewOrCreate===false ? (
-          <> 
+          <>
             <div className="formComponentContainer" >
               < CreateMove boardState={positionHash}/>
             </div>
           </>
           ) : (
-          <> 
+          <>
             <div className = "infoComponentContainer">
-              <InformationPanel  bestMove={bestMove}/>
+              <InformationPanel  bestMove={bestMove} colorToMove = {colorToMove} colorSelected = {whiteOrBlack}/>
             </div>
           </>
           )}

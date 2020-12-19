@@ -30,7 +30,7 @@ class InformationPanel extends Component {
           }
           //print each trap from list of attributes
           for (let i = 0; i < n; i++) {
-              items.push({ 
+              items.push({
                   name: traps[i],
                   risk: risks[i],
                   reward: rewards[i],
@@ -44,41 +44,61 @@ class InformationPanel extends Component {
   };
 
   render(){
-    let traps = this.printBestMove();
-    let n = traps.length;
-    let html = [];
-    let arrow = " -> "
-    //print each trap with an empty line between
-    for (let i = 0; i < n; i++) {
-      console.log(traps[i].name);
-        html.push(
-          <div className='trapBox' key={i+1}>
-            <div className='trapBorderExperiment'>
-              <div className='trapContent'>
-                <h4 className='trapTitle'>{traps[i].name}</h4>
-                <div className='trapInfoContainer'> 
-                  <p className='trapInfo'>{traps[i].initialPos}{arrow}{traps[i].finalPos}</p>
-                  <p className="trapInfo">Risk: {traps[i].risk}, Reward: {traps[i].reward}  </p>
-                  <p className="trapInfo">{traps[i].desc}</p>
+    let colorSelectedHelper;
+    if (this.props.colorSelected === true){
+      colorSelectedHelper = 0;
+    }else if (this.props.colorSelected === false){
+      colorSelectedHelper = 1;
+    }
+    if (this.props.colorToMove === colorSelectedHelper){
+      let traps = this.printBestMove();
+      let n = traps.length;
+      let html = [];
+      let arrow = " -> "
+      //print each trap with an empty line between
+      for (let i = 0; i < n; i++) {
+        console.log(traps[i].name);
+          html.push(
+            <div className='trapBox' key={i+1}>
+              <div className='trapBorderExperiment'>
+                <div className='trapContent'>
+                  <h4 className='trapTitle'>{traps[i].name}</h4>
+                  <div className='trapInfoContainer'>
+                    <p className='trapInfo'>{traps[i].initialPos}{arrow}{traps[i].finalPos}</p>
+                    <p className="trapInfo">Risk: {traps[i].risk}, Reward: {traps[i].reward}  </p>
+                    <p className="trapInfo">{traps[i].desc}</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        )
-    }
+          )
+      }
     //end of html
-    html.push(<div key = {n+1}></div>);
+      html.push(<div key = {n+1}></div>);
 
-    return (
-            <div className='infoContainer'>
-              <div className='infoTitle'>
-                <h2>Available Traps</h2>
+      return (
+              <div className='infoContainer'>
+                <div className='infoTitle'>
+                  <h2>Available Traps</h2>
+                </div>
+                <div className='infoContentContainer'>
+                  {html}
+                </div>
               </div>
-              <div className='infoContentContainer'> 
-                {html}
-              </div>
-            </div>
-          );
+            );
+    }else if (this.props.colorToMove === 1){
+      return (<div className='infoContainer'>
+        <div className='infoTitle'>
+          <h2>Black To Move</h2>
+        </div>
+      </div>);
+    }else if (this.props.colorToMove === 0){
+      return (<div className='infoContainer'>
+        <div className='infoTitle'>
+          <h2>White To Move</h2>
+        </div>
+      </div>);
+    }
   }
 }
 

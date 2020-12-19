@@ -59,25 +59,21 @@ class Chessboard extends Component {
                                     this.state.initialPosition,
                                     [r,c], this.state.auxBoardState);
 
-      //make sure the en Passant value is changed
+      // Create new En Passant, colorToMove values
       let auxBoardStateHelper = this.state.auxBoardState.slice();
       if (newBoard[r][c][1]===1 && Math.abs(this.state.initialPosition[0]-r) === 2){
         auxBoardStateHelper[3] = [r,c];
       }else{
         auxBoardStateHelper[3] = null;
       }
-      this.setState({auxBoardState: auxBoardStateHelper});
-
+      let colorToMove = (auxBoardStateHelper[2]+1)%2;
+      auxBoardStateHelper[2]=colorToMove;
+      this.setState({initialPosition: null, piecePositions: newBoard, auxBoardState: auxBoardStateHelper});
       ///what is this magic below
-      getMove(this.hashPosition()).then((response) => {
+      getMove(this.hashPosition(newBoard, auxBoardStateHelper)).then((response) => {
         this.props.setBestMove(response);
       });
 
-      this.setState({initialPosition: null, piecePositions: newBoard})
-
-      let colorToMove = (auxBoardStateHelper[2]+1)%2;
-      auxBoardStateHelper[2]=colorToMove;
-      this.setState({auxBoardState: auxBoardStateHelper});
 
 
       //isWhiteKingInCheck(this.state.piecePositions, this.state.auxBoardState);
@@ -152,16 +148,18 @@ class Chessboard extends Component {
     }
     return hash;
 }
-  hashPosition(){
-    let stateString = this.state.piecePositions.toString()+'|'+
-    this.state.auxBoardState.toString();
+  hashPosition(board, aux){
+    let stateString = board.toString()+'|'+
+    aux.toString();
     let result = this.hashCode(stateString);
     this.props.setPositionHash(result);
+    this.props.setColorToMove(aux[2]);
     return result;
   }
 
   // rendering the chessboard means displaying the result HTML from buildBoard()
   render() {
+
     return (
       this.buildBoard()
     );
