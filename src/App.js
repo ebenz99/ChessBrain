@@ -23,9 +23,6 @@ function App() {
           < Chessboard  setPositionHash={setHash} setBestMove={setBestMove} setColorToMove = {setColorToMove}/>
         </div>
         <div className="rightSide">
-        <div className="toggleContainer">
-          <ToggleSwitch id='functionToggle2' checked={whiteOrBlack} onChange={setWhiteOrBlack} optionLabels = {['white','black']}/>
-        </div>
           {viewOrCreate===false ? (
           <>
             <div className="formComponentContainer" >
@@ -41,6 +38,9 @@ function App() {
           )}
           <div className="toggleContainer">
             <ToggleSwitch id='functionToggle' checked={viewOrCreate} onChange={setViewOrCreate}/>
+          </div>
+          <div className="toggleContainer">
+            <ToggleSwitch id='colorToggle' checked={whiteOrBlack} onChange={setWhiteOrBlack} optionLabels = {['white','black']}/>
           </div>
         </div>
       </div>
