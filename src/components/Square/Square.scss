@@ -1,4 +1,5 @@
 .whiteSquare{
+  @media only screen and (min-width: 800px) {
     background-color: var(--light-square);
     border: 3px solid black;
     width: 6vw;
@@ -6,22 +7,41 @@
     padding: 0px;
     margin: 0px;
     display: block;
+  }
+  @media only screen and (max-width: 800px) {
+    background-color: var(--light-square);
+    border: 3px solid black;
+    width: 11vw;
+    height: 11vw;
+    padding: 0px;
+    margin: 0px;
+    display: block;
+  }
 }
-
-
 
 .whiteSquare:hover{
     background-color: var(--light-square-hover);
 }
 
 .blackSquare{
-    background-color: var(--dark-square);
-    border: 3px solid black;
-    width: 6vw;
-    height: 6vw;
-    padding: 0px;
-    margin: 0px;
-    display: block;
+    @media only screen and (min-width: 800px) {
+        background-color: var(--dark-square);
+        border: 3px solid black;
+        width: 6vw;
+        height: 6vw;
+        padding: 0px;
+        margin: 0px;
+        display: block;
+    }
+    @media only screen and (max-width: 800px) {
+        background-color: var(--dark-square);
+        border: 3px solid black;
+        width: 11vw;
+        height: 11vw;
+        padding: 0px;
+        margin: 0px;
+        display: block;
+    }
 }
 
 .blackSquare:hover{
@@ -29,11 +49,22 @@
 }
 
 .orangeSquare{
-    background-color: var(--selected-square);
-    border: 3px solid rgb(0, 0, 0);
-    width: 6vw;
-    height: 6vw;
-    padding: 0px;
-    margin: 0px;
-    display: block;
+    @media only screen and (min-width: 800px) {
+        background-color: var(--selected-square);
+        border: 3px solid black;
+        width: 6vw;
+        height: 6vw;
+        padding: 0px;
+        margin: 0px;
+        display: block;
+    }
+    @media only screen and (max-width: 800px) {
+        background-color: var(--selected-square);
+        border: 3px solid black;
+        width: 11vw;
+        height: 11vw;
+        padding: 0px;
+        margin: 0px;
+        display: block;
+    }
 }
