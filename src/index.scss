@@ -1,6 +1,7 @@
 /*:root {
   --light-square:rgb(191, 235, 150);
   --light-square-hover:rgb(132, 163, 103);
+  --light-square-glow: #00d312;
   --dark-square: rgb(120, 155, 87);
   --dark-square-hover: rgb(93, 121, 67);
   --selected-square: rgb(221, 155, 13);
@@ -10,10 +11,12 @@
 :root {
   --light-square:#A3CCF4;
   --light-square-hover:#779DC3;
+  --light-square-glow: #00ABE3;
   --dark-square: #5E656E;
   --dark-square-hover:#779DC3 ;
   --selected-square: ;
   --bg-color-dark: #282c34;
+  --trap-bg-dark: #3e4961;
 }
 
 body {

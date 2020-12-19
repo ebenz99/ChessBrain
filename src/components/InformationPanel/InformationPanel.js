@@ -69,7 +69,16 @@ class InformationPanel extends Component {
     //end of html
     html.push(<div key = {n+1}></div>);
 
-    return <div key='content' className='infoContentContainer'>{html}</div>;
+    return (
+            <div className='infoContainer'>
+              <div className='infoTitle'>
+                <h2>Available Traps</h2>
+              </div>
+              <div className='infoContentContainer'> 
+                {html}
+              </div>
+            </div>
+          );
   }
 }
 
