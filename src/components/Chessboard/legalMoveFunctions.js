@@ -1,5 +1,6 @@
 
 import _ from 'lodash';
+import {normalPieceMove} from "./augmentBoardFunctions.js";
 
 //helper function to see if a square has black, white, or no piece
 export function squareHasPiece(board, position){
@@ -9,13 +10,26 @@ export function squareHasPiece(board, position){
 // the following functions are called in whiteLegalMove() depending on the piece
 export function whiteKingLegalMove(board, initialPosition, finalPosition, auxBoardState){
   let whiteCanCastle = auxBoardState[0];
-
   if (_.isEqual(finalPosition, [7,6]) && _.isEqual(initialPosition, [7,4]) &&  whiteCanCastle){
-    return (squareHasPiece(board, [7,5])=== 2) && (squareHasPiece(board, [7,6]) ===2);
+    let spaceIsClear = (squareHasPiece(board, [7,5])=== 2) && (squareHasPiece(board, [7,6]) === 2)
+    let notThroughCheck = !(
+      isWhiteKingInCheck(board, auxBoardState) ||
+      isWhiteKingInCheck(normalPieceMove(board, initialPosition,[7,5]), auxBoardState) ||
+      isWhiteKingInCheck(normalPieceMove(board, initialPosition,[7,6]), auxBoardState)
+    )
+    return spaceIsClear && notThroughCheck;
   }else if (_.isEqual(finalPosition,[7,2]) && _.isEqual(initialPosition, [7,4]) && whiteCanCastle){
-    return (squareHasPiece(board, [7,1]) === 2) &&
-            (squareHasPiece(board, [7,2]) === 2) &&
-            (squareHasPiece(board, [7,3]) === 2);
+    let spaceIsClear = (
+      (squareHasPiece(board, [7,1]) === 2) &&
+      (squareHasPiece(board, [7,2]) === 2) &&
+      (squareHasPiece(board, [7,3]) === 2)
+    );
+    let notThroughCheck = !(
+      isWhiteKingInCheck(board, auxBoardState) ||
+      isWhiteKingInCheck(normalPieceMove(board, initialPosition,[7,3]), auxBoardState) ||
+      isWhiteKingInCheck(normalPieceMove(board, initialPosition,[7,2]), auxBoardState)
+    )
+    return spaceIsClear && notThroughCheck;
   }
 
   //main logic
@@ -35,13 +49,11 @@ export function whitePawnLegalMove(board, initialPosition, finalPosition, auxBoa
   // En Passant stuff
   if(_.isEqual(auxBoardState[3], [initialPosition[0],initialPosition[1]+1]) &&
       _.isEqual(finalPosition, [auxBoardState[3][0]-1,auxBoardState[3][1]])){
-    // console.log("valid en passant");
     return true;
   }
 
   if(_.isEqual(auxBoardState[3], [initialPosition[0],initialPosition[1]-1]) &&
       _.isEqual(finalPosition, [auxBoardState[3][0]-1,auxBoardState[3][1]])){
-    // console.log("valid en passant");
     return true;
   }
 
@@ -172,12 +184,26 @@ export function blackKingLegalMove(board, initialPosition, finalPosition, auxBoa
   let blackCanCastle = auxBoardState[1];
   //seperate logic for castling
   if (_.isEqual(finalPosition, [0,6]) && _.isEqual(initialPosition, [0,4]) && blackCanCastle){
-    // console.log("in correct conditional");
-    return (squareHasPiece(board, [0,5])=== 2) && (squareHasPiece(board, [0,6]) ===2);
+    let spaceIsClear = (squareHasPiece(board, [0,5])=== 2) && (squareHasPiece(board, [0,6]) ===2);
+    let notThroughCheck = !(
+      isBlackKingInCheck(board, auxBoardState) ||
+      isBlackKingInCheck(normalPieceMove(board, initialPosition,[0,5]), auxBoardState) ||
+      isBlackKingInCheck(normalPieceMove(board, initialPosition,[0,6]), auxBoardState)
+    );
+    return spaceIsClear && notThroughCheck;
   }else if (_.isEqual(finalPosition, [0,2]) && _.isEqual(initialPosition, [0,4]) && blackCanCastle){
-    return (squareHasPiece(board, [0,1]) === 2) &&
-            (squareHasPiece(board, [0,2]) === 2) &&
-            (squareHasPiece(board, [0,3]) === 2);
+    let spaceIsClear = (
+      (squareHasPiece(board, [0,1]) === 2) &&
+      (squareHasPiece(board, [0,2]) === 2) &&
+      (squareHasPiece(board, [0,3]) === 2)
+    );
+    let notThroughCheck = !(
+      isBlackKingInCheck(board, auxBoardState) ||
+      isBlackKingInCheck(normalPieceMove(board, initialPosition, [0,3]), auxBoardState) ||
+      isBlackKingInCheck(normalPieceMove(board, initialPosition, [0,2]), auxBoardState)
+    );
+
+    return spaceIsClear && notThroughCheck;
   }
 
   // main logic
@@ -197,13 +223,11 @@ export function blackPawnLegalMove(board, initialPosition, finalPosition, auxBoa
 
   if(_.isEqual(auxBoardState[3], [initialPosition[0],initialPosition[1]+1]) &&
       _.isEqual(finalPosition, [auxBoardState[3][0]+1,auxBoardState[3][1]])){
-    // console.log("valid en passant");
     return true;
   }
 
   if(_.isEqual(auxBoardState[3], [initialPosition[0],initialPosition[1]-1]) &&
       _.isEqual(finalPosition, [auxBoardState[3][0]+1,auxBoardState[3][1]])){
-    // console.log("valid en passant");
     return true;
   }
 
@@ -358,7 +382,6 @@ export function isWhiteKingInCheck(board, auxBoardState) {
       if (board[i][j][0]===1){
         kingInCheck = blackLegalMove(board, board[i][j][1], [i,j], kingCoordinates, auxBoardState);
         if (kingInCheck){
-          // console.log("white king is in check");
           return true;
         }
       }
