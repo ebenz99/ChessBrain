@@ -11,10 +11,10 @@ export class StatusBox extends Component {
   }
 
   disappear = () => {
-    if (this.state.status) {
-      setTimeout((() => {
-        this.setState({status: null});
-      }), 3000)
+    if (this.props.status !== null) {
+      setTimeout(() => {
+        this.props.setStatus(null);
+      }, 2500)
     }
   }
 
@@ -23,21 +23,25 @@ export class StatusBox extends Component {
     let statusBoxID = 'noStatusBox';
     let titleID = 'successTitle';
     let textID = 'successText';
-    if (this.state.status){
-      if (this.state.status === 'good'){
+    let title = 'Success';
+    let text = 'Posted trap!'
+    if (this.props.status){
+      if (this.props.status === 'good'){
         statusBoxID = 'successBox';
       }
       else {
         statusBoxID = 'failBox';
         titleID = 'failTitle';
         textID = 'failText';
+        title = 'Error';
+        text = 'Trap not posted'
       }
     }
     return (
       <div className='box' id={statusBoxID}>
         <div className="statusBoxInner">
-          <p className="title" id={titleID}>StatusBox</p>
-          <p className="text" id={textID}>{this.props.statusBox}</p>
+          <p className="title" id={titleID}>{title}</p>
+          <p className="text" id={textID}>{text}</p>
         </div>
       </div>
     );

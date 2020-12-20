@@ -17,7 +17,7 @@ function App() {
 
   return (
     <>
-      <StatusBox status={status}/>
+      <StatusBox status={status} setStatus={setStatus}/>
       <div className="App">
         <div className="leftSide" >
           < Chessboard  setPositionHash={setHash} setBestMove={setBestMove} setColorToMove = {setColorToMove}/>
@@ -26,7 +26,7 @@ function App() {
           {viewOrCreate===false ? (
           <>
             <div className="formComponentContainer" >
-              < CreateMove boardState={positionHash}/>
+              < CreateMove boardState={positionHash} setStatus={setStatus}/>
             </div>
           </>
           ) : (
@@ -36,11 +36,19 @@ function App() {
             </div>
           </>
           )}
-          <div className="toggleContainer">
-            <ToggleSwitch id='functionToggle' checked={viewOrCreate} onChange={setViewOrCreate}/>
-          </div>
-          <div className="toggleContainer">
-            <ToggleSwitch id='colorToggle' checked={whiteOrBlack} onChange={setWhiteOrBlack} optionLabels = {['white','black']}/>
+          <div className="toggles">
+            <div className="toggleRowContainer">
+              <p className='toggleLabel'>Mode:</p>
+              <div className="toggleContainer">
+                <ToggleSwitch id='functionToggle' checked={viewOrCreate} onChange={setViewOrCreate}/>
+              </div>
+            </div>
+            <div className="toggleRowContainer">
+              <p className='toggleLabel'>Playing as:</p>
+              <div className="toggleContainer">
+                <ToggleSwitch id='colorToggle' checked={whiteOrBlack} onChange={setWhiteOrBlack} optionLabels = {['white','black']}/>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -29,9 +29,10 @@ class CreateMove extends Component {
             headers: { 'Content-Type': 'application/json' }
         })
         .then((response) => {
-            //alert("You have added a trap")
+            this.props.setStatus('good');
             return response
         }, (error) => {
+            this.props.setStatus('bad');
             return error;
         });
     }

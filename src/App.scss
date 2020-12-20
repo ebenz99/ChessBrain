@@ -25,6 +25,7 @@
   @media only screen and (max-width: 800px) {
     width: 80vw;
     margin-left: 10vw;
+    margin-top: 4vh;
     height: 90vh;
     flex-direction: column-reverse;
   }
@@ -38,21 +39,49 @@
 }
 
 .infoComponentContainer {
-  border-style: solid;
-  border-color: white;
   width: inherit;
   height: 80vh;
   display: flex;
   flex-direction: column;
 }
 
-.toggleContainer {
-  @media only screen and (min-width: 800px) {
-    margin-top: 2vh;
-  }
+.toggleRowContainer {
   width: 100%;
+  margin: 0 auto;
   height: 34px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
+  @media only screen and (min-width: 800px) {
+    width: 100%;
+    margin-top: 15px;
+  }
+  @media only screen and (max-width: 800px) {
+    width: 40%;
+  }
+}
+
+.toggles {
+  @media only screen and (max-width: 800px) {
+    margin-bottom: 2vh;
+  }
+}
+
+.toggleContainer {
+  height: inherit;
+  width: 15vw;
+}
+
+
+.toggleLabel {
+  @media only screen and (min-width: 800px) {
+    font-size: 1.5vw;
+  }
+  @media only screen and (max-width: 800px) {
+    font-size: 2.5vw;
+  }
+  margin-top: 6px;
+  font-size: 2vw;
+  color: white;
+  font-weight: bold;
 }

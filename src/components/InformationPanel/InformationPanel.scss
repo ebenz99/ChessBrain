@@ -8,19 +8,17 @@
         max-height: 80%;
     }
     @media only screen and (min-width: 1400px) {
-        max-height: 93%;
+        max-height: 83%;
     }
+    border-style: solid;
+    border-color: white;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     border-radius: 5px;
-    // border: 2px solid white;
 }
 
-// .infoComponentContainer {
-//     max-width: 30vw;
-//   }
 
 .infoTitle {
     width: 100%;

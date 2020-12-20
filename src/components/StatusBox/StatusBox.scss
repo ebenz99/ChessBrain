@@ -3,7 +3,7 @@
 }
 
 .statusBoxInner {
-    padding: .5vh;
+    padding: 4px;
 }
 
 .box {
@@ -42,12 +42,14 @@
         text-align: center;
         font-weight: bold;
         font-size: 2vh;
+        margin-top: 0px;
     }
     /* phones+tablets */
     @media only screen and (max-width: 800px) {
         text-align: center;
         font-weight: bold;
         font-size: 3vh;
+        margin-top: 0px;
     }
 }
 
