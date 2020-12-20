@@ -4,7 +4,17 @@ import CreateMove from './components/CreateMove/CreateMove.js';
 import InformationPanel from './components/InformationPanel/InformationPanel.js'
 import StatusBox from './components/StatusBox/StatusBox.js'
 import React, { useState } from 'react';
+import ReactGA from 'react-ga';
 import ToggleSwitch from './components/Toggle/Toggle';
+
+const history = createBrowserHistory();
+
+ReactGA.initialize("UA-xxxxxxxx-x", {
+    debug: true,
+    gaOptions: { cookieFlags: 'max-age=7200;samesite=none;secure' },
+  });
+
+ReactGA.pageview("theBrain");
 
 function App() {
 
