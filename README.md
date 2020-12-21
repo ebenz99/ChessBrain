@@ -1,4 +1,4 @@
-# ChessBrain (WIP)
+# ChessBrain
 
 A web app for learning chess traps more quickly
 
