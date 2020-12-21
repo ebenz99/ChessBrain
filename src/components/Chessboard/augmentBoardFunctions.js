@@ -98,3 +98,54 @@ export function blackTakesEnPassant(board, initialPosition, finalPosition) {
   let board3 = replaceSquare(board2, finalPosition, [1,1]);
   return board3;
 }
+
+export function boardStateChange (board, initialPosition, finalPosition, auxBoardState, castling){
+  let boardClone = _.cloneDeep(board);
+  let auxBoardStateClone = _.cloneDeep(auxBoardState);
+  let castlingClone = _.cloneDeep(castling);
+
+  let newBoardClone = pieceMoveFinal(board, initialPosition, finalPosition, auxBoardState);
+  let newAuxBoardStateClone = auxBoardStateClone;
+  let newCastlingClone = castlingClone;
+
+  if (
+    boardClone[initialPosition[0]][initialPosition[1]] === 1 &&
+    Math.abs(initialPosition[0]-finalPosition[0])===2
+  ){
+    newAuxBoardStateClone[3] = _.cloneDeep(finalPosition);
+  }else {
+    newAuxBoardStateClone[3] = null;
+  }
+  if (_.isEqual(boardClone[initialPosition[0]][initialPosition[1]], [0,10])){
+    newAuxBoardStateClone[0] = false;
+  } else if (_.isEqual(boardClone[initialPosition[0]][initialPosition[1]], [1,10])){
+    newAuxBoardStateClone[1] = false;
+  } else if (_.isEqual(initialPosition, [7,0])){
+    newCastlingClone[1] = false;
+  } else if (_.isEqual(initialPosition, [7,7])){
+    newCastlingClone[0] = false;
+  } else if (_.isEqual(initialPosition, [0,0])){
+    newCastlingClone[4] = false;
+  } else if (_.isEqual(initialPosition, [0,7])){
+    newCastlingClone[3] = false;
+  }
+
+  if (!newAuxBoardStateClone[0]){
+    newCastlingClone[0] = false;
+    newCastlingClone[1] = false;
+  }
+
+  if (!newAuxBoardStateClone[1]){
+    newCastlingClone[3] = false;
+    newCastlingClone[4] = false;
+  }
+  if (!newCastlingClone[0] && !newCastlingClone[1]){
+    newAuxBoardStateClone[0] = false;
+  }
+  if (!newCastlingClone[2] && !newCastlingClone[3]){
+    newAuxBoardStateClone[1] = false;
+  }
+
+  newAuxBoardStateClone[2] = (auxBoardStateClone[2]+1) % 2;
+  return [newBoardClone, newAuxBoardStateClone, newCastlingClone];
+}

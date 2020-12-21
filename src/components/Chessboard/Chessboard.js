@@ -4,8 +4,8 @@ import Square from '../Square/Square.js';
 import { PIECE_MAPPINGS, COLOR_MAPPINGS, BLANK_SQUARE } from '../../constants.js';
 import getMove from '../../utilities/getMove.js'
 import './Chessboard.scss';
-import { legalMove, isWhiteKingInCheck, isBlackKingInCheck} from './legalMoveFunctions.js';
-import { pieceMoveFinal } from './augmentBoardFunctions.js';
+import { legalMoveFinal } from './legalMoveFunctions.js';
+import { boardStateChange } from './augmentBoardFunctions.js';
 
 class Chessboard extends Component {
   constructor(props) {
@@ -28,12 +28,15 @@ class Chessboard extends Component {
         ],
         // [if W can castle, if B can castle, who's turn, can a pawn be taken en passant]
         auxBoardState: [true,true,0,null],
+        //if white can castle kingside, if white can castle queenside,
+        //if black can castle kinside, if black can castle queenside
+        castling: [true, true, true, true],
         initialPosition: null
     }
     // allows setPosition's "this" calls to always refer to the chessboard object
     this.setPosition = this.setPosition.bind(this);
     this.hashPosition = this.hashPosition.bind(this);
-
+    // Give the rest of the app information on the initial Position;
     let stateString = this.state.piecePositions.toString()+'|'+
     this.state.auxBoardState.toString();
     let result = this.hashCode(stateString);
@@ -45,42 +48,31 @@ class Chessboard extends Component {
     // if an initial has already been clicked
     if (this.state.initialPosition) {
       // if the same square clicked twice, just reset the initial position to null
-
       if(_.isEqual(this.state.initialPosition, [r,c])){
         this.setState({initialPosition: null});
         return;
       }
       //otherwise check if this is a legal move
       let stateCopy = _.cloneDeep(this.state);
-      if (legalMove(stateCopy.piecePositions,
+      if (legalMoveFinal(stateCopy.piecePositions,
         stateCopy.piecePositions[stateCopy.initialPosition[0]][stateCopy.initialPosition[1]][1],
         stateCopy.piecePositions[stateCopy.initialPosition[0]][stateCopy.initialPosition[1]][0],
-        stateCopy.initialPosition, [r,c], stateCopy.auxBoardState) === false){return;}
+        stateCopy.initialPosition, [r,c], stateCopy.auxBoardState, stateCopy.castling) === false){return;}
 
       //otherwise make the move
-      let newBoard = pieceMoveFinal(this.state.piecePositions,
+      let newBoard = boardStateChange(this.state.piecePositions,
                                     this.state.initialPosition,
-                                    [r,c], this.state.auxBoardState);
+                                    [r,c], this.state.auxBoardState, this.state.castling);
 
       // Create new En Passant, colorToMove value, and castling values
-      let auxBoardStateHelper = this.state.auxBoardState.slice();
-      if (newBoard[r][c][1]===1 && Math.abs(this.state.initialPosition[0]-r) === 2){
-        auxBoardStateHelper[3] = [r,c];
-      }else{
-        auxBoardStateHelper[3] = null;
-      }
-      if (_.isEqual(newBoard[r][c],[0,10])){
-        auxBoardStateHelper[0] = false;
-      } else if (_.isEqual(newBoard[r][c],[1,10])){
-        auxBoardStateHelper[1] = false;
-      }
-      let colorToMove = (auxBoardStateHelper[2]+1)%2;
-      auxBoardStateHelper[2 ]= colorToMove;
-      this.setState({initialPosition: null, piecePositions: newBoard, auxBoardState: auxBoardStateHelper});
+
+      this.setState({initialPosition: null, piecePositions: newBoard[0], auxBoardState: newBoard[1], castling: newBoard[2]});
+      console.log(newBoard[1]);
       ///what is this magic below
-      getMove(this.hashPosition(newBoard, auxBoardStateHelper)).then((response) => {
+      getMove(this.hashPosition(newBoard[0], newBoard[1], newBoard[2])).then((response) => {
         this.props.setBestMove(response);
       });
+
 
 
 
@@ -156,9 +148,9 @@ class Chessboard extends Component {
     }
     return hash;
 }
-  hashPosition(board, aux){
+  hashPosition(board, aux, castling){
     let stateString = board.toString()+'|'+
-    aux.toString();
+    aux.toString() + '|' + castling.toString();
     let result = this.hashCode(stateString);
     this.props.setPositionHash(result);
     this.props.setColorToMove(aux[2]);
