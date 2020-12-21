@@ -97,3 +97,10 @@ button {
 button:hover {
     background-color: white;
 }
+
+.snapshotButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 2vh;
+}
