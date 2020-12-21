@@ -22,9 +22,9 @@ function App() {
       <StatusBox status={status} setStatus={setStatus}/>
       <div className="App">
         <div className="leftSide" >
+        <button onClick = {() => {boardReference.current.pasteSnapshot()}}>take snap</button> <button onClick= {() => boardReference.current.copySnapshot()}>set snap</button>
           < Chessboard ref = {boardReference} setPositionHash={setHash} setBestMove={setBestMove} setColorToMove = {setColorToMove}/>
         </div>
-        <button onClick = {() => {boardReference.current.pasteSnapshot()}}>take snap</button> <button onClick= {() => boardReference.current.copySnapshot()}>set snap</button>
         <div className="rightSide">
           {viewOrCreate===false ? (
           <>

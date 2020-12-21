@@ -85,3 +85,15 @@
   color: white;
   font-weight: bold;
 }
+
+button {
+  border-radius: 5px 5px 5px 5px;
+  font-size: 3vh;
+
+  background-color: var(--light-square);
+  border: 2px solid var(--light-square);
+}
+
+button:hover {
+    background-color: white;
+}
