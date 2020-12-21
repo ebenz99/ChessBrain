@@ -3,7 +3,7 @@ import Chessboard from './components/Chessboard/Chessboard.js';
 import CreateMove from './components/CreateMove/CreateMove.js';
 import InformationPanel from './components/InformationPanel/InformationPanel.js'
 import StatusBox from './components/StatusBox/StatusBox.js'
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ToggleSwitch from './components/Toggle/Toggle';
 
 function App() {
@@ -14,14 +14,17 @@ function App() {
   const [colorToMove, setColorToMove] = useState(0);
   const [whiteOrBlack, setWhiteOrBlack] = useState(true);
   const [status, setStatus] = useState(null);
+  const boardReference = useRef();
+
 
   return (
     <>
       <StatusBox status={status} setStatus={setStatus}/>
       <div className="App">
         <div className="leftSide" >
-          < Chessboard  setPositionHash={setHash} setBestMove={setBestMove} setColorToMove = {setColorToMove}/>
+          < Chessboard ref = {boardReference} setPositionHash={setHash} setBestMove={setBestMove} setColorToMove = {setColorToMove}/>
         </div>
+        <button onClick = {() => {boardReference.current.pasteSnapshot()}}>take snap</button> <button onClick= {() => boardReference.current.copySnapshot()}>set snap</button>
         <div className="rightSide">
           {viewOrCreate===false ? (
           <>

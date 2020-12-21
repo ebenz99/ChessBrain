@@ -15,6 +15,24 @@ class Chessboard extends Component {
 
     this.state={
 
+      // the state that the chessboard will return to when we reset
+      // be default we want it to be the starting board.
+      defaultChessBoardState: {
+        piecePositions:
+          [
+            [[1,5], [1,3], [1,4], [1,9], [1,10], [1,4], [1,3], [1,5]],
+            [[1,1], [1,1], [1,1], [1,1], [1,1], [1,1], [1,1], [1,1]],
+            [[2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2]],
+            [[2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2]],
+            [[2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2]],
+            [[2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2]],
+            [[0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1]],
+            [[0,5], [0,3], [0,4], [0,9], [0,10], [0,4], [0,3], [0,5]]
+          ],
+          auxBoardState: [true,true,0,null],
+          castling: [true, true, true, true],
+      },
+
       piecePositions:
         [
           [[1,5], [1,3], [1,4], [1,9], [1,10], [1,4], [1,3], [1,5]],
@@ -41,6 +59,7 @@ class Chessboard extends Component {
     this.state.auxBoardState.toString();
     let result = this.hashCode(stateString);
     this.props.setPositionHash(result);
+    this.copySnapshot();
   }
 
   // marks a position as either initial or final state
@@ -67,7 +86,6 @@ class Chessboard extends Component {
       // Create new En Passant, colorToMove value, and castling values
 
       this.setState({initialPosition: null, piecePositions: newBoard[0], auxBoardState: newBoard[1], castling: newBoard[2]});
-      console.log(newBoard[1]);
       ///what is this magic below
       getMove(this.hashPosition(newBoard[0], newBoard[1], newBoard[2])).then((response) => {
         this.props.setBestMove(response);
@@ -157,9 +175,40 @@ class Chessboard extends Component {
     return result;
   }
 
+takeSnapshot(){
+    let result = [
+      _.cloneDeep(this.state.piecePositions),
+      _.cloneDeep(this.state.auxBoardState),
+      _.cloneDeep(this.state.castling)
+    ];
+    return result;
+  }
+
+copySnapshot (){
+  let snap = this.takeSnapshot();
+  this.setState ({
+    defaultChessBoardState: {
+      piecePositions:snap[0],
+      auxBoardState:snap[1],
+      castling:snap[2]
+    }
+  });
+}
+
+pasteSnapshot (){
+    let argumentArrayClone = _.cloneDeep(this.state.defaultChessBoardState);
+    console.log (argumentArrayClone);
+    this.setState(
+      {
+        piecePositions: argumentArrayClone.piecePositions,
+        auxBoardState: argumentArrayClone.auxBoardState,
+        castling: argumentArrayClone.castling
+      }
+    );
+  }
+
   // rendering the chessboard means displaying the result HTML from buildBoard()
   render() {
-
     return (
       this.buildBoard()
     );
