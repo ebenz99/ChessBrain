@@ -5,6 +5,12 @@ import InformationPanel from './components/InformationPanel/InformationPanel.js'
 import StatusBox from './components/StatusBox/StatusBox.js'
 import React, { useState, useRef } from 'react';
 import ToggleSwitch from './components/Toggle/Toggle';
+import { faHistory, faCamera } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+
+library.add( faHistory, faCamera);
+
 
 function App() {
 
@@ -23,7 +29,8 @@ function App() {
       <div className="App">
         <div className="leftSide" >
         <div className="snapshotButtons">
-          <button onClick = {() => {boardReference.current.pasteSnapshot()}}>take snap</button> <button onClick= {() => boardReference.current.copySnapshot()}>set to snap</button>
+          <button onClick = {() => {boardReference.current.pasteSnapshot()}}><FontAwesomeIcon icon="history" size = "3x"/></button>
+          <button onClick= {() => boardReference.current.copySnapshot()}><FontAwesomeIcon icon="camera" size = "3x"/></button>
         </div>
           < Chessboard ref = {boardReference} setPositionHash={setHash} setBestMove={setBestMove} setColorToMove = {setColorToMove}/>
         </div>

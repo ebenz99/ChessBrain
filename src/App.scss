@@ -88,8 +88,6 @@
 
 button {
   border-radius: 5px 5px 5px 5px;
-  font-size: 3vh;
-
   background-color: var(--light-square);
   border: 2px solid var(--light-square);
 }
@@ -101,6 +99,6 @@ button:hover {
 .snapshotButtons {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
   margin-bottom: 2vh;
 }

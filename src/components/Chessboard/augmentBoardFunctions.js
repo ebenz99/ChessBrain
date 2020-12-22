@@ -1,4 +1,4 @@
-import { PIECE_MAPPINGS, COLOR_MAPPINGS, BLANK_SQUARE } from '../../constants.js';
+import { BLANK_SQUARE } from '../../constants.js';
 import _ from 'lodash';
 
 //replaces the content of a square with the desired piece or BLANK_SQUARE
