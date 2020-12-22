@@ -20,6 +20,21 @@ function App() {
   const [colorToMove, setColorToMove] = useState(0);
   const [whiteOrBlack, setWhiteOrBlack] = useState(true);
   const [status, setStatus] = useState(null);
+  const [defaultBoard, setDefaultBoard] = useState({
+    piecePositions:
+      [
+        [[1,5], [1,3], [1,4], [1,9], [1,10], [1,4], [1,3], [1,5]],
+        [[1,1], [1,1], [1,1], [1,1], [1,1], [1,1], [1,1], [1,1]],
+        [[2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2]],
+        [[2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2]],
+        [[2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2]],
+        [[2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2]],
+        [[0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1]],
+        [[0,5], [0,3], [0,4], [0,9], [0,10], [0,4], [0,3], [0,5]]
+      ],
+      auxBoardState: [true,true,0,null],
+      castling: [true, true, true, true]
+  });
   const boardReference = useRef();
 
 
@@ -32,7 +47,9 @@ function App() {
           <button onClick = {() => {boardReference.current.pasteSnapshot()}}><FontAwesomeIcon icon="history" size = "3x"/></button>
           <button onClick= {() => boardReference.current.copySnapshot()}><FontAwesomeIcon icon="camera" size = "3x"/></button>
         </div>
-          < Chessboard ref = {boardReference} setPositionHash={setHash} setBestMove={setBestMove} setColorToMove = {setColorToMove}/>
+          < Chessboard ref = {boardReference} setPositionHash={setHash}
+          setBestMove={setBestMove} setColorToMove = {setColorToMove}
+          defaultBoard = {defaultBoard} setDefaultBoard = {setDefaultBoard}/>
         </div>
         <div className="rightSide">
           {viewOrCreate===false ? (
