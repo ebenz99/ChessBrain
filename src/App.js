@@ -5,6 +5,7 @@ import InformationPanel from './components/InformationPanel/InformationPanel.js'
 import StatusBox from './components/StatusBox/StatusBox.js'
 import React, { useState, useRef } from 'react';
 import ToggleSwitch from './components/Toggle/Toggle';
+import Dropdown from './components/Dropdown/Dropdown.js';
 
 
 // fontawsome favicons
@@ -59,19 +60,23 @@ function App() {
   const boardReference = useRef();
 
 
+
   return (
     <>
       <StatusBox status={status} setStatus={setStatus}/>
       <div className="App">
         <div className="leftSide" >
           <div className="snapshotButtons">
-            <button className="snapshotButton" onClick= {() => boardReference.current.copySnapshot()}><FontAwesomeIcon icon="camera" size = "3x"/></button>
-            <button className="snapshotButton" onClick = {() => {boardReference.current.pasteSnapshot()}}><FontAwesomeIcon icon="history" size = "3x"/></button>
+            <button className = "snapshotButton" onClick = {() => {boardReference.current.pasteSnapshot()}}><FontAwesomeIcon icon="history" size = "3x"/></button>
+            <button className = "snapshotButton" onClick= {() => boardReference.current.copySnapshot()}><FontAwesomeIcon icon="camera" size = "3x"/></button>
+            < Dropdown boardStateLibrary = {boardStateLibrary}/>
           </div>
+        <div>
           < Chessboard ref = {boardReference} setPositionHash={setHash}
           setBestMove={setBestMove} setColorToMove = {setColorToMove}
           defaultBoard = {defaultBoard} setDefaultBoard = {setDefaultBoard}
           boardStateLibrary = {boardStateLibrary} setBoardStateLibrary = {setBoardStateLibrary}/>
+        </div>
         </div>
         <div className="rightSide">
           {viewOrCreate===false ? (
