@@ -188,6 +188,12 @@ pasteSnapshot (){
       this.props.setBestMove(response);
     });
   }
+  addToBoardLibrary(name){
+    let snapshot = this.takeSnapshot();
+    let boardStateLibrary = _.cloneDeep(this.props.boardStateLibrary);
+    let result = boardStateLibrary.set(name, snapshot);
+    this.props.setBoardStateLibrary(result);
+  }
 
   // rendering the chessboard means displaying the result HTML from buildBoard()
   render() {

@@ -5,6 +5,9 @@ import InformationPanel from './components/InformationPanel/InformationPanel.js'
 import StatusBox from './components/StatusBox/StatusBox.js'
 import React, { useState, useRef } from 'react';
 import ToggleSwitch from './components/Toggle/Toggle';
+
+
+// fontawsome favicons
 import { faHistory, faCamera } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -35,6 +38,24 @@ function App() {
       auxBoardState: [true,true,0,null],
       castling: [true, true, true, true]
   });
+  const [boardStateLibrary, setBoardStateLibrary] = useState(new Map([
+    [ "Starting Position",
+      {piecePositions:
+        [
+          [[1,5], [1,3], [1,4], [1,9], [1,10], [1,4], [1,3], [1,5]],
+          [[1,1], [1,1], [1,1], [1,1], [1,1], [1,1], [1,1], [1,1]],
+          [[2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2]],
+          [[2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2]],
+          [[2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2]],
+          [[2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2], [2,2]],
+          [[0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1]],
+          [[0,5], [0,3], [0,4], [0,9], [0,10], [0,4], [0,3], [0,5]]
+        ],
+        auxBoardState: [true,true,0,null],
+        castling: [true, true, true, true]}
+    ]
+  ]));
+
   const boardReference = useRef();
 
 
@@ -49,7 +70,8 @@ function App() {
           </div>
           < Chessboard ref = {boardReference} setPositionHash={setHash}
           setBestMove={setBestMove} setColorToMove = {setColorToMove}
-          defaultBoard = {defaultBoard} setDefaultBoard = {setDefaultBoard}/>
+          defaultBoard = {defaultBoard} setDefaultBoard = {setDefaultBoard}
+          boardStateLibrary = {boardStateLibrary} setBoardStateLibrary = {setBoardStateLibrary}/>
         </div>
         <div className="rightSide">
           {viewOrCreate===false ? (
