@@ -9,11 +9,11 @@ import Dropdown from './components/Dropdown/Dropdown.js';
 
 
 // fontawsome favicons
-import { faHistory, faCamera } from '@fortawesome/free-solid-svg-icons';
+import { faHistory, faCamera, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
-library.add( faHistory, faCamera);
+library.add( faHistory, faCamera, faPlus);
 
 
 function App() {
@@ -59,17 +59,19 @@ function App() {
 
   const boardReference = useRef();
 
-
-
   return (
     <>
       <StatusBox status={status} setStatus={setStatus}/>
       <div className="App">
         <div className="leftSide" >
           <div className="snapshotButtons">
-            <button className = "snapshotButton" onClick = {() => {boardReference.current.pasteSnapshot()}}><FontAwesomeIcon icon="history" size = "3x"/></button>
-            <button className = "snapshotButton" onClick= {() => boardReference.current.copySnapshot()}><FontAwesomeIcon icon="camera" size = "3x"/></button>
-            < Dropdown boardStateLibrary = {boardStateLibrary}/>
+            <button className = "snapshotButton" onClick = {() => boardReference.current.pasteSnapshot()}><FontAwesomeIcon icon="history" size = "3x"/></button>
+            <button className = "snapshotButton" onClick = {() => boardReference.current.copySnapshot()}><FontAwesomeIcon icon="camera" size = "3x"/></button>
+            < Dropdown boardStateLibrary = {boardStateLibrary} setDefaultBoard = {setDefaultBoard}
+              className = "snapshotButton"/>
+            <button className = "snapshotButton" onClick = {() => boardReference.current.addToBoardLibrary(Math.random().toString())}>
+              <FontAwesomeIcon icon="plus" size = "3x"/>
+            </button>
           </div>
         <div>
           < Chessboard ref = {boardReference} setPositionHash={setHash}

@@ -1,0 +1,18 @@
+.dropdownMenuContainer {
+  z-index: 1;
+  margin-right: 5%;
+}
+
+.dropdownMenuContent {
+  position: absolute;
+  border-style: solid;
+  border-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.dropdownMenuItem {
+  background-color: var(--light-square);
+  display: block;
+}
