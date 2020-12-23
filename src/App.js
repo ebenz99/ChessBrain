@@ -43,10 +43,10 @@ function App() {
       <StatusBox status={status} setStatus={setStatus}/>
       <div className="App">
         <div className="leftSide" >
-        <div className="snapshotButtons">
-          <button onClick = {() => {boardReference.current.pasteSnapshot()}}><FontAwesomeIcon icon="history" size = "3x"/></button>
-          <button onClick= {() => boardReference.current.copySnapshot()}><FontAwesomeIcon icon="camera" size = "3x"/></button>
-        </div>
+          <div className="snapshotButtons">
+            <button className="snapshotButton" onClick= {() => boardReference.current.copySnapshot()}><FontAwesomeIcon icon="camera" size = "3x"/></button>
+            <button className="snapshotButton" onClick = {() => {boardReference.current.pasteSnapshot()}}><FontAwesomeIcon icon="history" size = "3x"/></button>
+          </div>
           < Chessboard ref = {boardReference} setPositionHash={setHash}
           setBestMove={setBestMove} setColorToMove = {setColorToMove}
           defaultBoard = {defaultBoard} setDefaultBoard = {setDefaultBoard}/>

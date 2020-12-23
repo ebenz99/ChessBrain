@@ -1,6 +1,6 @@
 .App {
   @media only screen and (min-width: 800px) {
-    padding-top: 3%;
+    padding-top: 1%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -86,19 +86,22 @@
   font-weight: bold;
 }
 
-button {
-  border-radius: 5px 5px 5px 5px;
-  background-color: var(--light-square);
-  border: 2px solid var(--light-square);
-}
-
-button:hover {
-    background-color: white;
-}
-
 .snapshotButtons {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   margin-bottom: 2vh;
+  @media only screen and (max-width: 800px) {
+    margin-left: 6vw;
+  }
+}
+
+.snapshotButton {
+  border-radius: 5px 5px 5px 5px;
+  background-color: var(--light-square);
+  border: 2px solid var(--light-square);
+  margin-right: 5%;
+}
+.snapshotButton:hover {
+  background-color: white;
 }
