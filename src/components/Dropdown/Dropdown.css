@@ -5,14 +5,17 @@
 
 .dropdownMenuContent {
   position: absolute;
-  border-style: solid;
-  border-color: white;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  overflow-y: scroll;
+  height: 30vh;
 }
 
 .dropdownMenuItem {
+  border-style: double;
+  border-color: white;
   background-color: var(--light-square);
   display: block;
+  margin:0;
 }

@@ -27,7 +27,7 @@ class Dropdown extends Component {
       items.push(
         <button key = {key} className = "dropdownMenuItem" onClick = {() =>
           this.props.setDefaultBoard(_.cloneDeep(value))}>
-          {key}
+          <h2>{key}</h2>
         </button>
       );
     }

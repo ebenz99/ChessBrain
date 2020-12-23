@@ -69,9 +69,13 @@ function App() {
             <button className = "snapshotButton" onClick = {() => boardReference.current.copySnapshot()}><FontAwesomeIcon icon="camera" size = "3x"/></button>
             < Dropdown boardStateLibrary = {boardStateLibrary} setDefaultBoard = {setDefaultBoard}
               className = "snapshotButton"/>
-            <button className = "snapshotButton" onClick = {() => boardReference.current.addToBoardLibrary(Math.random().toString())}>
+            <button className = "snapshotButton" onClick = {
+              () => {boardReference.current.addToBoardLibrary(document.getElementById("positionName").value);
+              document.getElementById("positionName").value = '';}
+            }>
               <FontAwesomeIcon icon="plus" size = "3x"/>
             </button>
+            <input className="formInput" id="positionName" required type="text" placeholder="Position Name"/>
           </div>
         <div>
           < Chessboard ref = {boardReference} setPositionHash={setHash}

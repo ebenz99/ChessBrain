@@ -186,6 +186,10 @@ pasteSnapshot (){
     });
   }
   addToBoardLibrary(name){
+    var name_copy = (' ' + name).slice(1);
+    name_copy = name_copy.split(" ").join("");
+    console.log ("|"+name_copy+"|");
+    if (name_copy === ""){return}
     let snapshot = this.takeSnapshot();
     let boardStateLibrary = _.cloneDeep(this.props.boardStateLibrary);
     let result = boardStateLibrary.set(name, snapshot);
