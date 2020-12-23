@@ -73,17 +73,14 @@ class Chessboard extends Component {
       getMove(this.hashPosition(newBoard[0], newBoard[1], newBoard[2])).then((response) => {
         this.props.setBestMove(response);
       });
-
-
-
-
       //isWhiteKingInCheck(this.state.piecePositions, this.state.auxBoardState);
       //isBlackKingInCheck(this.state.piecePositions, this.state.auxBoardState);
-
     }
     else {
-      // otherwise set this as the initial if it isn't blank
-      if(!_.isEqual(this.state.piecePositions[r][c], BLANK_SQUARE)){
+      if (this.state.piecePositions[r][c][0] !== this.state.auxBoardState[2]){
+        return;
+      }
+      else {
         this.setState({initialPosition: [r,c]});
       }
     }

@@ -89,9 +89,12 @@
 .snapshotButtons {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   margin-bottom: 2vh;
+  @media only screen and (min-width: 800px) {
+    justify-content: flex-start;
+  }
   @media only screen and (max-width: 800px) {
+    justify-content: center;
     margin-left: 6vw;
   }
 }
