@@ -25,8 +25,12 @@ class Dropdown extends Component {
     const items = [];
     for (let [key,value] of this.props.boardStateLibrary.entries()){
       items.push(
-        <button key = {key} className = "dropdownMenuItem" onClick = {() =>
-          this.props.setDefaultBoard(_.cloneDeep(value))}>
+        <button key = {key} className = "dropdownMenuItem" onClick = {() => {
+            this.props.setDefaultBoard(_.cloneDeep(value));
+            setTimeout(() => {            //using a setTimeout here because there's a bit of an async delay to setting the default board
+              this.props.pasteSnapshot();
+            }, 100)
+          }}>
           <h2>{key}</h2>
         </button>
       );

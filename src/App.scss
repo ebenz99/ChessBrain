@@ -108,3 +108,9 @@
 .snapshotButton:hover {
   background-color: white;
 }
+
+.positionInput {
+  @media only screen and (max-width: 800px) {
+    margin-right: 6vw;
+  }
+}

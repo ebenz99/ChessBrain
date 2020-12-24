@@ -145,7 +145,8 @@ class Chessboard extends Component {
         hash = hash & hash; // Convert to 32bit integer
     }
     return hash;
-}
+  }
+
   hashPosition(board, aux, castling){
     let stateString = board.toString()+'|'+
     aux.toString() + '|' + castling.toString();
@@ -155,7 +156,7 @@ class Chessboard extends Component {
     return result;
   }
 
-takeSnapshot(){
+  takeSnapshot(){
     let result = {
       piecePositions: _.cloneDeep(this.state.piecePositions),
       auxBoardState: _.cloneDeep(this.state.auxBoardState),
@@ -164,12 +165,12 @@ takeSnapshot(){
     return result;
   }
 
-copySnapshot (){
-  let result = this.takeSnapshot();
-  this.props.setDefaultBoard(result);
-}
+  copySnapshot (){
+    let result = this.takeSnapshot();
+    this.props.setDefaultBoard(result);
+  }
 
-pasteSnapshot (){
+  pasteSnapshot (){
     let argumentArrayClone = _.cloneDeep(this.props.defaultBoard);
     this.setState(
       {
@@ -186,7 +187,7 @@ pasteSnapshot (){
     });
   }
   addToBoardLibrary(name){
-    var name_copy = (' ' + name).slice(1);
+    let name_copy = (' ' + name).slice(1);
     name_copy = name_copy.split(" ").join("");
     console.log ("|"+name_copy+"|");
     if (name_copy === ""){return}

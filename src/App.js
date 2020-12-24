@@ -67,15 +67,16 @@ function App() {
           <div className="snapshotButtons">
             <button className = "snapshotButton" onClick = {() => boardReference.current.pasteSnapshot()}><FontAwesomeIcon icon="history" size = "3x"/></button>
             <button className = "snapshotButton" onClick = {() => boardReference.current.copySnapshot()}><FontAwesomeIcon icon="camera" size = "3x"/></button>
-            < Dropdown boardStateLibrary = {boardStateLibrary} setDefaultBoard = {setDefaultBoard}
-              className = "snapshotButton"/>
+            < Dropdown className = "snapshotButton" boardStateLibrary = {boardStateLibrary} setDefaultBoard = {setDefaultBoard} pasteSnapshot={() => boardReference.current.pasteSnapshot()}/>
             <button className = "snapshotButton" onClick = {
-              () => {boardReference.current.addToBoardLibrary(document.getElementById("positionName").value);
-              document.getElementById("positionName").value = '';}
+              () => {
+                boardReference.current.addToBoardLibrary(document.getElementById("positionName").value);
+                document.getElementById("positionName").value = '';
+              }
             }>
               <FontAwesomeIcon icon="plus" size = "3x"/>
             </button>
-            <input className="formInput" id="positionName" required type="text" placeholder="Position Name"/>
+            <input className="positionInput" id="positionName" required type="text" placeholder="Position Name"/>
           </div>
         <div>
           < Chessboard ref = {boardReference} setPositionHash={setHash}
